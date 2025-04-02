@@ -1,20 +1,43 @@
 package com.example.sirh_backend.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Employee {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
+
     private String lastName;
 
-    public Employee() {}
+    private int leaveBalance;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Leave> leaves;
+
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    private Position position;
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_skill",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private List<Skill> skills;
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    public Employee() {
+    }
 
     public Employee(String firstName, String lastName) {
         this.firstName = firstName;
