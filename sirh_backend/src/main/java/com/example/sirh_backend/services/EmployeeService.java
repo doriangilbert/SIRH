@@ -2,7 +2,6 @@ package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.models.Employee;
 import com.example.sirh_backend.repositories.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
