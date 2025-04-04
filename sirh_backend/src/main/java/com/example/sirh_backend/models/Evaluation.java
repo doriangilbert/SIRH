@@ -105,4 +105,20 @@ public class Evaluation {
                 ", objectives=" + objectives +
                 '}';
     }
+
+    public void addFeedback(Feedback feedback) {
+        this.feedbacks.add(feedback);
+    }
+
+    public void removeFeedback(Feedback feedback) {
+        this.feedbacks.remove(feedback);
+    }
+
+    public void addObjective(Objective objective) {
+        this.objectives.add(objective);
+    }
+
+    public void removeObjective(Objective objective) {
+        this.objectives.remove(objective);
+    }
 }
