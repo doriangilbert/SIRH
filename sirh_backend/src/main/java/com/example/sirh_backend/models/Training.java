@@ -87,4 +87,20 @@ public class Training {
                 ", skills=" + skills +
                 '}';
     }
+
+    public void addEmployee(Employee employee) {
+        this.employees.add(employee);
+    }
+
+    public void removeEmployee(Employee employee) {
+        this.employees.remove(employee);
+    }
+
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
+    }
+
+    public void removeSkill(Skill skill) {
+        this.skills.remove(skill);
+    }
 }
