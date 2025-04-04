@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.EmployeeDTO;
 import com.example.sirh_backend.models.Employee;
 import com.example.sirh_backend.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
-    public List<Employee> getAllEmployees() {
+    public List<EmployeeDTO> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
     @GetMapping("/employees/{id}")
-    public Employee getEmployeeById(@PathVariable long id) {
+    public EmployeeDTO getEmployeeById(@PathVariable long id) {
         return employeeService.getEmployeeById(id);
     }
 
