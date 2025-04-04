@@ -122,4 +122,20 @@ public class Employee {
                 ", team=" + team +
                 '}';
     }
+
+    public void addLeave(Leave leave) {
+        this.leaves.add(leave);
+    }
+
+    public void removeLeave(Leave leave) {
+        this.leaves.remove(leave);
+    }
+
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
+    }
+
+    public void removeSkill(Skill skill) {
+        this.skills.remove(skill);
+    }
 }
