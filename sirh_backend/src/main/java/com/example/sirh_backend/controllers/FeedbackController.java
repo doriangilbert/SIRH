@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.FeedbackDTO;
 import com.example.sirh_backend.models.Feedback;
 import com.example.sirh_backend.services.FeedbackService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class FeedbackController {
     }
 
     @GetMapping("/feedbacks")
-    public List<Feedback> getAllFeedbacks() {
+    public List<FeedbackDTO> getAllFeedbacks() {
         return feedbackService.getAllFeedbacks();
     }
 
     @GetMapping("/feedbacks/{id}")
-    public Feedback getFeedbackById(@PathVariable long id) {
+    public FeedbackDTO getFeedbackById(@PathVariable long id) {
         return feedbackService.getFeedbackById(id);
     }
 
