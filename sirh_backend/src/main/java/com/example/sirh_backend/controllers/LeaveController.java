@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.LeaveDTO;
 import com.example.sirh_backend.models.Leave;
 import com.example.sirh_backend.services.LeaveService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class LeaveController {
     }
 
     @GetMapping("/leaves")
-    public List<Leave> getAllLeaves() {
+    public List<LeaveDTO> getAllLeaves() {
         return leaveService.getAllLeaves();
     }
 
     @GetMapping("/leaves/{id}")
-    public Leave getLeaveById(@PathVariable long id) {
+    public LeaveDTO getLeaveById(@PathVariable long id) {
         return leaveService.getLeaveById(id);
     }
 
