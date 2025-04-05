@@ -124,18 +124,34 @@ public class Employee {
     }
 
     public void addLeave(Leave leave) {
-        this.leaves.add(leave);
+        if (this.leaves.contains(leave)) {
+            throw new IllegalArgumentException("Leave already exists");
+        } else {
+            this.leaves.add(leave);
+        }
     }
 
     public void removeLeave(Leave leave) {
-        this.leaves.remove(leave);
+        if (!this.leaves.contains(leave)) {
+            throw new IllegalArgumentException("Leave does not exist");
+        } else {
+            this.leaves.remove(leave);
+        }
     }
 
     public void addSkill(Skill skill) {
-        this.skills.add(skill);
+        if (this.skills.contains(skill)) {
+            throw new IllegalArgumentException("Skill already exists");
+        } else {
+            this.skills.add(skill);
+        }
     }
 
     public void removeSkill(Skill skill) {
-        this.skills.remove(skill);
+        if (!this.skills.contains(skill)) {
+            throw new IllegalArgumentException("Skill does not exist");
+        } else {
+            this.skills.remove(skill);
+        }
     }
 }
