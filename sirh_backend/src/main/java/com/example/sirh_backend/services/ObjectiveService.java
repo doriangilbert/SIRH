@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.dtos.ObjectiveDTO;
 import com.example.sirh_backend.models.Objective;
 import com.example.sirh_backend.repositories.ObjectiveRepository;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,28 @@ public class ObjectiveService {
         this.objectiveRepository = objectiveRepository;
     }
 
-    public List<Objective> getAllObjectives() {
-        return objectiveRepository.findAll();
+    public List<ObjectiveDTO> getAllObjectives() {
+        return objectiveRepository.findAll().stream()
+                .map(objective -> new ObjectiveDTO(
+                        objective.getId(),
+                        objective.getDescription(),
+                        objective.isAchieved(),
+                        objective.getEvaluation().getId()
+                ))
+                .toList();
     }
 
-    public Objective getObjectiveById(long id) {
-        return objectiveRepository.findById(id).orElse(null);
+    public ObjectiveDTO getObjectiveById(long id) {
+        Objective objective = objectiveRepository.findById(id).orElse(null);
+        if (objective != null) {
+            return new ObjectiveDTO(
+                    objective.getId(),
+                    objective.getDescription(),
+                    objective.isAchieved(),
+                    objective.getEvaluation().getId()
+            );
+        }
+        return null;
     }
 
     public Objective createObjective(Objective objective) {
