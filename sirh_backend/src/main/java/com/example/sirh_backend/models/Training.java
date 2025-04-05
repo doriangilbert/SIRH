@@ -89,18 +89,34 @@ public class Training {
     }
 
     public void addEmployee(Employee employee) {
-        this.employees.add(employee);
+        if (this.employees.contains(employee)) {
+            throw new IllegalArgumentException("Employee already exists");
+        } else {
+            this.employees.add(employee);
+        }
     }
 
     public void removeEmployee(Employee employee) {
-        this.employees.remove(employee);
+        if (!this.employees.contains(employee)) {
+            throw new IllegalArgumentException("Employee does not exist");
+        } else {
+            this.employees.remove(employee);
+        }
     }
 
     public void addSkill(Skill skill) {
-        this.skills.add(skill);
+        if (this.skills.contains(skill)) {
+            throw new IllegalArgumentException("Skill already exists");
+        } else {
+            this.skills.add(skill);
+        }
     }
 
     public void removeSkill(Skill skill) {
-        this.skills.remove(skill);
+        if (!this.skills.contains(skill)) {
+            throw new IllegalArgumentException("Skill does not exist");
+        } else {
+            this.skills.remove(skill);
+        }
     }
 }
