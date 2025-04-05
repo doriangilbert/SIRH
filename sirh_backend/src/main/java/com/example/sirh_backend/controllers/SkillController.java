@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.SkillDTO;
 import com.example.sirh_backend.models.Skill;
 import com.example.sirh_backend.services.SkillService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class SkillController {
     }
 
     @GetMapping("/skills")
-    public List<Skill> getAllSkills() {
+    public List<SkillDTO> getAllSkills() {
         return skillService.getAllSkills();
     }
 
     @GetMapping("/skills/{id}")
-    public Skill getSkillById(@PathVariable long id) {
+    public SkillDTO getSkillById(@PathVariable long id) {
         return skillService.getSkillById(id);
     }
 
