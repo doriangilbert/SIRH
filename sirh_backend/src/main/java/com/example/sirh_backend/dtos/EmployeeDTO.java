@@ -3,6 +3,7 @@ package com.example.sirh_backend.dtos;
 import java.util.List;
 
 public class EmployeeDTO {
+
     private Long id;
     private String firstName;
     private String lastName;
