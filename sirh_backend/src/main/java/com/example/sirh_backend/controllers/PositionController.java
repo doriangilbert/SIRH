@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.PositionDTO;
 import com.example.sirh_backend.models.Position;
 import com.example.sirh_backend.services.PositionService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class PositionController {
     }
 
     @GetMapping("/positions")
-    public List<Position> getAllPositions() {
+    public List<PositionDTO> getAllPositions() {
         return positionService.getAllPositions();
     }
 
     @GetMapping("/positions/{id}")
-    public Position getPositionById(@PathVariable long id) {
+    public PositionDTO getPositionById(@PathVariable long id) {
         return positionService.getPositionById(id);
     }
 
