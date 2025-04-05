@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.ObjectiveDTO;
 import com.example.sirh_backend.models.Objective;
 import com.example.sirh_backend.services.ObjectiveService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class ObjectiveController {
     }
 
     @GetMapping("/objectives")
-    public List<Objective> getAllObjectives() {
+    public List<ObjectiveDTO> getAllObjectives() {
         return objectiveService.getAllObjectives();
     }
 
     @GetMapping("/objectives/{id}")
-    public Objective getObjectiveById(@PathVariable long id) {
+    public ObjectiveDTO getObjectiveById(@PathVariable long id) {
         return objectiveService.getObjectiveById(id);
     }
 
