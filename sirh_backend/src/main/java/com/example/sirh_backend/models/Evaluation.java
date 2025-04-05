@@ -107,18 +107,34 @@ public class Evaluation {
     }
 
     public void addFeedback(Feedback feedback) {
-        this.feedbacks.add(feedback);
+        if (this.feedbacks.contains(feedback)) {
+            throw new IllegalArgumentException("Feedback already exists");
+        } else {
+            this.feedbacks.add(feedback);
+        }
     }
 
     public void removeFeedback(Feedback feedback) {
-        this.feedbacks.remove(feedback);
+        if (!this.feedbacks.contains(feedback)) {
+            throw new IllegalArgumentException("Feedback does not exist");
+        } else {
+            this.feedbacks.remove(feedback);
+        }
     }
 
     public void addObjective(Objective objective) {
-        this.objectives.add(objective);
+        if (this.objectives.contains(objective)) {
+            throw new IllegalArgumentException("Objective already exists");
+        } else {
+            this.objectives.add(objective);
+        }
     }
 
     public void removeObjective(Objective objective) {
-        this.objectives.remove(objective);
+        if (!this.objectives.contains(objective)) {
+            throw new IllegalArgumentException("Objective does not exist");
+        } else {
+            this.objectives.remove(objective);
+        }
     }
 }
