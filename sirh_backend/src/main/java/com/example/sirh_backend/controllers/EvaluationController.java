@@ -1,5 +1,6 @@
 package com.example.sirh_backend.controllers;
 
+import com.example.sirh_backend.dtos.EvaluationDTO;
 import com.example.sirh_backend.models.Evaluation;
 import com.example.sirh_backend.services.EvaluationService;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,12 @@ public class EvaluationController {
     }
 
     @GetMapping("/evaluations")
-    public List<Evaluation> getAllEvaluations() {
+    public List<EvaluationDTO> getAllEvaluations() {
         return evaluationService.getAllEvaluations();
     }
 
     @GetMapping("/evaluations/{id}")
-    public Evaluation getEvaluationById(@PathVariable long id) {
+    public EvaluationDTO getEvaluationById(@PathVariable long id) {
         return evaluationService.getEvaluationById(id);
     }
 
