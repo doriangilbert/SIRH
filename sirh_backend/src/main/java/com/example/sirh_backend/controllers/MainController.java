@@ -21,6 +21,7 @@ public class MainController {
     private final SkillRepository skillRepository;
     private final TeamRepository teamRepository;
     private final TrainingRepository trainingRepository;
+    private final TrainingRequestRepository trainingRequestRepository;
 
     public MainController(EmployeeRepository employeeRepository,
                           EvaluationRepository evaluationRepository,
@@ -30,7 +31,8 @@ public class MainController {
                           PositionRepository positionRepository,
                           SkillRepository skillRepository,
                           TeamRepository teamRepository,
-                          TrainingRepository trainingRepository) {
+                          TrainingRepository trainingRepository,
+                          TrainingRequestRepository trainingRequestRepository) {
         this.employeeRepository = employeeRepository;
         this.evaluationRepository = evaluationRepository;
         this.feedbackRepository = feedbackRepository;
@@ -40,6 +42,7 @@ public class MainController {
         this.skillRepository = skillRepository;
         this.teamRepository = teamRepository;
         this.trainingRepository = trainingRepository;
+        this.trainingRequestRepository = trainingRequestRepository;
     }
 
     @GetMapping("/")
@@ -49,7 +52,7 @@ public class MainController {
 
     @PostMapping("/init")
     public String init() {
-        if (employeeRepository.count() > 0 || evaluationRepository.count() > 0 || feedbackRepository.count() > 0 || leaveRequestRepository.count() > 0 || objectiveRepository.count() > 0 || positionRepository.count() > 0 || skillRepository.count() > 0 || teamRepository.count() > 0 || trainingRepository.count() > 0) {
+        if (employeeRepository.count() > 0 || evaluationRepository.count() > 0 || feedbackRepository.count() > 0 || leaveRequestRepository.count() > 0 || objectiveRepository.count() > 0 || positionRepository.count() > 0 || skillRepository.count() > 0 || teamRepository.count() > 0 || trainingRepository.count() > 0 || trainingRequestRepository.count() > 0) {
             throw new IllegalStateException("Tables are not empty. Please reset the database before initializing.");
         }
 
@@ -172,14 +175,20 @@ public class MainController {
                     training.addSkill(skill);
                 }
             }
+            trainingRepository.save(training);
+        }
+
+        for (Training training : trainings) {
             int numEmployees = (int) (Math.random() * employees.size()) + 1;
             for (int i = 0; i < numEmployees; i++) {
                 Employee employee = employees.get((int) (Math.random() * employees.size()));
-                if (!training.getEmployees().contains(employee)) {
-                    training.addEmployee(employee);
+                TrainingRequest trainingRequest = new TrainingRequest(training, employee);
+                Team team = employee.getTeam();
+                if (team != null && team.getManager() != null) {
+                    trainingRequest.setReviewer(team.getManager());
                 }
+                trainingRequestRepository.save(trainingRequest);
             }
-            trainingRepository.save(training);
         }
 
         return "SIRH Backend Initialized!";
