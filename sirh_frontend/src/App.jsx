@@ -106,7 +106,7 @@ function App() {
 
     return (
         <>
-            <header className="flex items-center justify-between p-5 bg-gray-200">
+            <header className="flex items-center justify-between p-5 bg-gray-200 z-10">
                 <div className="flex items-center">
                     <a href="https://vite.dev" target="_blank">
                         <img src={viteLogo} className="logo" alt="Vite logo"/>
@@ -144,6 +144,9 @@ function App() {
                     <button onClick={() => fetchData('trainings')}
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Trainings
                     </button>
+                    <button onClick={() => fetchData('trainingrequests')}
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">TrainingRequests
+                    </button>
                 </div>
                 <button onClick={handleInit} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2">Init</button>
             </header>
@@ -152,25 +155,27 @@ function App() {
                 {!showRelatedDetails ? (
                     <>
                         {selectedClass && <h2 className="text-2xl mb-4">{selectedClass}</h2>}
-                        <table className="table-auto border-collapse border border-gray-400 mt-5">
-                            <thead>
-                            <tr>
-                                {columns.map(column => (
-                                    <th key={column} className="border border-gray-300 px-4 py-2">{column}</th>
-                                ))}
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {data.map(item => (
-                                <tr key={item.id}>
+                        <div className="overflow-y-auto max-h-[70vh] w-full">
+                            <table className="table-auto border-collapse border border-gray-400 mt-5 w-full">
+                                <thead>
+                                <tr>
                                     {columns.map(column => (
-                                        <td key={column}
-                                            className="border border-gray-300 px-4 py-2">{renderCell(item[column], column)}</td>
+                                        <th key={column} className="border border-gray-300 px-4 py-2">{column}</th>
                                     ))}
                                 </tr>
-                            ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {data.map(item => (
+                                    <tr key={item.id}>
+                                        {columns.map(column => (
+                                            <td key={column}
+                                                className="border border-gray-300 px-4 py-2">{renderCell(item[column], column)}</td>
+                                        ))}
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </>
                 ) : (
                     <div className="p-4 border border-gray-400">
