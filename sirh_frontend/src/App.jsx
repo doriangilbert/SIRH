@@ -9,9 +9,23 @@ function App() {
     const [columns, setColumns] = useState([])
     const [error, setError] = useState(null)
     const [selectedClass, setSelectedClass] = useState('')
+    const [relatedDetails, setRelatedDetails] = useState(null)
+    const [showRelatedDetails, setShowRelatedDetails] = useState(false)
+
+    const formatRouteName = (routeName) => {
+        const lowerRouteName = routeName.toLowerCase()
+        if (["manager", "reviewer"].includes(lowerRouteName)) {
+            return "employees"
+        }
+        if (!lowerRouteName.endsWith('s')) {
+            return lowerRouteName + 's'
+        }
+        return lowerRouteName
+    }
 
     const fetchData = (selectedClass) => {
         setSelectedClass(selectedClass)
+        setShowRelatedDetails(false)
         axios.get(`http://localhost:8080/${selectedClass}`)
             .then(response => {
                 console.log(response.data)
@@ -40,14 +54,54 @@ function App() {
             })
     }
 
-    const renderCell = (value) => {
-        if (Array.isArray(value)) {
-            return value.join(', ')
-        } else if (typeof value === 'boolean') {
-            return value ? 'True' : 'False'
-        } else {
+    const handleRelatedIdClick = (relatedClass, id) => {
+        const formattedClass = formatRouteName(relatedClass)
+        axios.get(`http://localhost:8080/${formattedClass}/${id}`)
+            .then(response => {
+                console.log(`Details for ${formattedClass} ID ${id}:`, response.data)
+                setRelatedDetails(response.data)
+                setShowRelatedDetails(true)
+                setError(null)
+            })
+            .catch(error => {
+                console.error('Error :', error)
+                setError(error.response ? `Error: ${error.response.data.message}` : 'An error occurred while fetching related details.')
+            })
+    }
+
+    const renderCell = (value, column) => {
+        if (['year', 'leaveBalance'].includes(column)) {
             return value
         }
+        if (column !== 'id' && typeof value === 'number') {
+            return (
+                <button
+                    onClick={() => handleRelatedIdClick(column, value)}
+                    className="text-blue-500 underline"
+                >
+                    {value}
+                </button>
+            )
+        }
+        if (Array.isArray(value)) {
+            return (
+                <div>
+                    {value.map((id, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handleRelatedIdClick(column, id)}
+                            className="text-blue-500 underline mr-2"
+                        >
+                            {id}
+                        </button>
+                    ))}
+                </div>
+            )
+        }
+        if (typeof value === 'boolean') {
+            return value ? 'True' : 'False'
+        }
+        return value
     }
 
     return (
@@ -95,26 +149,41 @@ function App() {
             </header>
             <div className="h-screen flex flex-col items-center justify-center">
                 {error && <div className="text-red-500 mb-4">{error}</div>}
-                {selectedClass && <h2 className="text-2xl mb-4">{selectedClass}</h2>}
-                <table className="table-auto border-collapse border border-gray-400 mt-5">
-                    <thead>
-                    <tr>
-                        {columns.map(column => (
-                            <th key={column} className="border border-gray-300 px-4 py-2">{column}</th>
-                        ))}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {data.map(item => (
-                        <tr key={item.id}>
-                            {columns.map(column => (
-                                <td key={column}
-                                    className="border border-gray-300 px-4 py-2">{renderCell(item[column])}</td>
+                {!showRelatedDetails ? (
+                    <>
+                        {selectedClass && <h2 className="text-2xl mb-4">{selectedClass}</h2>}
+                        <table className="table-auto border-collapse border border-gray-400 mt-5">
+                            <thead>
+                            <tr>
+                                {columns.map(column => (
+                                    <th key={column} className="border border-gray-300 px-4 py-2">{column}</th>
+                                ))}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {data.map(item => (
+                                <tr key={item.id}>
+                                    {columns.map(column => (
+                                        <td key={column}
+                                            className="border border-gray-300 px-4 py-2">{renderCell(item[column], column)}</td>
+                                    ))}
+                                </tr>
                             ))}
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </>
+                ) : (
+                    <div className="p-4 border border-gray-400">
+                        <button
+                            onClick={() => setShowRelatedDetails(false)}
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+                        >
+                            Back
+                        </button>
+                        <h3 className="text-xl mb-2">Related Details</h3>
+                        <pre>{JSON.stringify(relatedDetails, null, 2)}</pre>
+                    </div>
+                )}
             </div>
         </>
     )
