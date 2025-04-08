@@ -2,7 +2,7 @@ package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.dtos.EmployeeDTO;
 import com.example.sirh_backend.models.Employee;
-import com.example.sirh_backend.models.Leave;
+import com.example.sirh_backend.models.LeaveRequest;
 import com.example.sirh_backend.models.Skill;
 import com.example.sirh_backend.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class EmployeeService {
                         employee.getFirstName(),
                         employee.getLastName(),
                         employee.getLeaveBalance(),
-                        employee.getLeaves().stream().map(Leave::getId).collect(Collectors.toList()),
+                        employee.getLeaveRequests().stream().map(LeaveRequest::getId).collect(Collectors.toList()),
                         employee.getPosition().getId(),
                         employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()),
                         employee.getTeam().getId()
@@ -42,7 +42,7 @@ public class EmployeeService {
                     employee.getFirstName(),
                     employee.getLastName(),
                     employee.getLeaveBalance(),
-                    employee.getLeaves().stream().map(Leave::getId).collect(Collectors.toList()),
+                    employee.getLeaveRequests().stream().map(LeaveRequest::getId).collect(Collectors.toList()),
                     employee.getPosition().getId(),
                     employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()),
                     employee.getTeam().getId()

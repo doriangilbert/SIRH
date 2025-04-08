@@ -15,7 +15,7 @@ public class MainController {
     private final EmployeeRepository employeeRepository;
     private final EvaluationRepository evaluationRepository;
     private final FeedbackRepository feedbackRepository;
-    private final LeaveRepository leaveRepository;
+    private final LeaveRequestRepository leaveRequestRepository;
     private final ObjectiveRepository objectiveRepository;
     private final PositionRepository positionRepository;
     private final SkillRepository skillRepository;
@@ -25,7 +25,7 @@ public class MainController {
     public MainController(EmployeeRepository employeeRepository,
                           EvaluationRepository evaluationRepository,
                           FeedbackRepository feedbackRepository,
-                          LeaveRepository leaveRepository,
+                          LeaveRequestRepository leaveRequestRepository,
                           ObjectiveRepository objectiveRepository,
                           PositionRepository positionRepository,
                           SkillRepository skillRepository,
@@ -34,7 +34,7 @@ public class MainController {
         this.employeeRepository = employeeRepository;
         this.evaluationRepository = evaluationRepository;
         this.feedbackRepository = feedbackRepository;
-        this.leaveRepository = leaveRepository;
+        this.leaveRequestRepository = leaveRequestRepository;
         this.objectiveRepository = objectiveRepository;
         this.positionRepository = positionRepository;
         this.skillRepository = skillRepository;
@@ -49,7 +49,7 @@ public class MainController {
 
     @PostMapping("/init")
     public String init() {
-        if (employeeRepository.count() > 0 || evaluationRepository.count() > 0 || feedbackRepository.count() > 0 || leaveRepository.count() > 0 || objectiveRepository.count() > 0 || positionRepository.count() > 0 || skillRepository.count() > 0 || teamRepository.count() > 0 || trainingRepository.count() > 0) {
+        if (employeeRepository.count() > 0 || evaluationRepository.count() > 0 || feedbackRepository.count() > 0 || leaveRequestRepository.count() > 0 || objectiveRepository.count() > 0 || positionRepository.count() > 0 || skillRepository.count() > 0 || teamRepository.count() > 0 || trainingRepository.count() > 0) {
             throw new IllegalStateException("Tables are not empty. Please reset the database before initializing.");
         }
 
@@ -143,10 +143,10 @@ public class MainController {
         for (Employee employee : employees) {
             if (Math.random() > 0.5) {
                 LocalDate startDate = LocalDate.of(2025, (int) (Math.random() * 12) + 1, (int) (Math.random() * 28) + 1);
-                LocalDate endDate = startDate.plusDays((int) (Math.random() * 10) + 1); // Assurer que la date de fin est après la date de début
-                Leave leave = new Leave(startDate, endDate, employee);
-                leaveRepository.save(leave);
-                int leaveDuration = (int) (endDate.toEpochDay() - startDate.toEpochDay()) + 1; // Inclure le jour de début
+                LocalDate endDate = startDate.plusDays((int) (Math.random() * 10) + 1);
+                LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
+                leaveRequestRepository.save(leaveRequest);
+                int leaveDuration = (int) (endDate.toEpochDay() - startDate.toEpochDay()) + 1;
                 employee.setLeaveBalance(employee.getLeaveBalance() - leaveDuration);
             }
         }

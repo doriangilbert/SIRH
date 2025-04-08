@@ -8,17 +8,17 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private int leaveBalance;
-    private List<Long> leavesIds;
+    private List<Long> leaveRequestsIds;
     private Long positionId;
     private List<Long> skillsIds;
     private Long teamId;
 
-    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, List<Long> leavesIds, Long positionId, List<Long> skillsIds, Long teamId) {
+    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, List<Long> leaveRequestsIds, Long positionId, List<Long> skillsIds, Long teamId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.leaveBalance = leaveBalance;
-        this.leavesIds = leavesIds;
+        this.leaveRequestsIds = leaveRequestsIds;
         this.positionId = positionId;
         this.skillsIds = skillsIds;
         this.teamId = teamId;
@@ -56,12 +56,12 @@ public class EmployeeDTO {
         this.leaveBalance = leaveBalance;
     }
 
-    public List<Long> getLeavesIds() {
-        return leavesIds;
+    public List<Long> getLeaveRequestsIds() {
+        return leaveRequestsIds;
     }
 
-    public void setLeavesIds(List<Long> leavesIds) {
-        this.leavesIds = leavesIds;
+    public void setLeaveRequestsIds(List<Long> leaveRequestsIds) {
+        this.leaveRequestsIds = leaveRequestsIds;
     }
 
     public Long getPositionId() {

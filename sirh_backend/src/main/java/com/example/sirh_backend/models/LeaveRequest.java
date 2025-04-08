@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class Leave {
+public class LeaveRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,18 +16,18 @@ public class Leave {
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
-    private LeaveStatus status;
+    private RequestStatus status;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    public Leave() {}
+    public LeaveRequest() {}
 
-    public Leave(LocalDate startDate, LocalDate endDate, Employee employee) {
+    public LeaveRequest(LocalDate startDate, LocalDate endDate, Employee employee) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.status = LeaveStatus.PENDING;
+        this.status = RequestStatus.PENDING;
         this.employee = employee;
     }
 
@@ -51,11 +51,11 @@ public class Leave {
         this.endDate = endDate;
     }
 
-    public LeaveStatus getStatus() {
+    public RequestStatus getStatus() {
         return status;
     }
 
-    public void setStatus(LeaveStatus status) {
+    public void setStatus(RequestStatus status) {
         this.status = status;
     }
 
@@ -69,7 +69,7 @@ public class Leave {
 
     @Override
     public String toString() {
-        return "Leave{" +
+        return "LeaveRequest{" +
                 "id=" + id +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +

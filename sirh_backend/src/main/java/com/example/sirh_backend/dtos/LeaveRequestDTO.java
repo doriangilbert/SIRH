@@ -1,6 +1,6 @@
 package com.example.sirh_backend.dtos;
 
-public class LeaveDTO {
+public class LeaveRequestDTO {
 
     private Long id;
     private String startDate;
@@ -8,7 +8,7 @@ public class LeaveDTO {
     private String status;
     private Long employeeId;
 
-    public LeaveDTO(Long id, String startDate, String endDate, String status, Long employeeId) {
+    public LeaveRequestDTO(Long id, String startDate, String endDate, String status, Long employeeId) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;

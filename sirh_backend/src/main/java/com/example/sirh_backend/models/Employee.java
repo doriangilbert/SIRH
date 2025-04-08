@@ -19,7 +19,7 @@ public class Employee {
     private int leaveBalance;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<Leave> leaves;
+    private List<LeaveRequest> leaveRequests;
 
     @ManyToOne
     @JoinColumn(name = "position_id")
@@ -43,7 +43,7 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.leaveBalance = 0;
-        this.leaves = new ArrayList<>();
+        this.leaveRequests = new ArrayList<>();
         this.position = position;
         this.skills = new ArrayList<>();
         this.team = team;
@@ -77,12 +77,12 @@ public class Employee {
         this.leaveBalance = leaveBalance;
     }
 
-    public List<Leave> getLeaves() {
-        return leaves;
+    public List<LeaveRequest> getLeaveRequests() {
+        return leaveRequests;
     }
 
-    public void setLeaves(List<Leave> leaves) {
-        this.leaves = leaves;
+    public void setLeaveRequests(List<LeaveRequest> leaveRequests) {
+        this.leaveRequests = leaveRequests;
     }
 
     public Position getPosition() {
@@ -116,26 +116,26 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", leaveBalance=" + leaveBalance +
-                ", leaves=" + leaves +
+                ", leaveRequests=" + leaveRequests +
                 ", position=" + position +
                 ", skills=" + skills +
                 ", team=" + team +
                 '}';
     }
 
-    public void addLeave(Leave leave) {
-        if (this.leaves.contains(leave)) {
-            throw new IllegalArgumentException("Leave already exists");
+    public void addLeaveRequest(LeaveRequest leaveRequest) {
+        if (this.leaveRequests.contains(leaveRequest)) {
+            throw new IllegalArgumentException("LeaveRequest already exists");
         } else {
-            this.leaves.add(leave);
+            this.leaveRequests.add(leaveRequest);
         }
     }
 
-    public void removeLeave(Leave leave) {
-        if (!this.leaves.contains(leave)) {
-            throw new IllegalArgumentException("Leave does not exist");
+    public void removeLeaveRequest(LeaveRequest leaveRequest) {
+        if (!this.leaveRequests.contains(leaveRequest)) {
+            throw new IllegalArgumentException("LeaveRequest does not exist");
         } else {
-            this.leaves.remove(leave);
+            this.leaveRequests.remove(leaveRequest);
         }
     }
 
