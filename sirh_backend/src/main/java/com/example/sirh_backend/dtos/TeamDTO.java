@@ -6,14 +6,14 @@ public class TeamDTO {
 
     private Long id;
     private String name;
-    private List<Long> employeesIds;
-    private Long managerId;
+    private List<Long> employees;
+    private Long manager;
 
-    public TeamDTO(Long id, String name, List<Long> employeesIds, Long managerId) {
+    public TeamDTO(Long id, String name, List<Long> employees, Long manager) {
         this.id = id;
         this.name = name;
-        this.employeesIds = employeesIds;
-        this.managerId = managerId;
+        this.employees = employees;
+        this.manager = manager;
     }
 
     public Long getId() {
@@ -32,19 +32,19 @@ public class TeamDTO {
         this.name = name;
     }
 
-    public List<Long> getEmployeesIds() {
-        return employeesIds;
+    public List<Long> getEmployees() {
+        return employees;
     }
 
-    public void setEmployeesIds(List<Long> employeesIds) {
-        this.employeesIds = employeesIds;
+    public void setEmployees(List<Long> employees) {
+        this.employees = employees;
     }
 
-    public Long getManagerId() {
-        return managerId;
+    public Long getManager() {
+        return manager;
     }
 
-    public void setManagerId(Long managerId) {
-        this.managerId = managerId;
+    public void setManager(Long manager) {
+        this.manager = manager;
     }
 }

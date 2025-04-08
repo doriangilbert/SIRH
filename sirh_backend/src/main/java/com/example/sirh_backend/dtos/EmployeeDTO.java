@@ -8,20 +8,20 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private int leaveBalance;
-    private List<Long> leaveRequestsIds;
-    private Long positionId;
-    private List<Long> skillsIds;
-    private Long teamId;
+    private List<Long> leaveRequests;
+    private Long position;
+    private List<Long> skills;
+    private Long team;
 
-    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, List<Long> leaveRequestsIds, Long positionId, List<Long> skillsIds, Long teamId) {
+    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, List<Long> leaveRequests, Long position, List<Long> skills, Long team) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.leaveBalance = leaveBalance;
-        this.leaveRequestsIds = leaveRequestsIds;
-        this.positionId = positionId;
-        this.skillsIds = skillsIds;
-        this.teamId = teamId;
+        this.leaveRequests = leaveRequests;
+        this.position = position;
+        this.skills = skills;
+        this.team = team;
     }
 
     public Long getId() {
@@ -56,35 +56,35 @@ public class EmployeeDTO {
         this.leaveBalance = leaveBalance;
     }
 
-    public List<Long> getLeaveRequestsIds() {
-        return leaveRequestsIds;
+    public List<Long> getLeaveRequests() {
+        return leaveRequests;
     }
 
-    public void setLeaveRequestsIds(List<Long> leaveRequestsIds) {
-        this.leaveRequestsIds = leaveRequestsIds;
+    public void setLeaveRequests(List<Long> leaveRequests) {
+        this.leaveRequests = leaveRequests;
     }
 
-    public Long getPositionId() {
-        return positionId;
+    public Long getPosition() {
+        return position;
     }
 
-    public void setPositionId(Long positionId) {
-        this.positionId = positionId;
+    public void setPosition(Long position) {
+        this.position = position;
     }
 
-    public List<Long> getSkillsIds() {
-        return skillsIds;
+    public List<Long> getSkills() {
+        return skills;
     }
 
-    public void setSkillsIds(List<Long> skillsIds) {
-        this.skillsIds = skillsIds;
+    public void setSkills(List<Long> skills) {
+        this.skills = skills;
     }
 
-    public Long getTeamId() {
-        return teamId;
+    public Long getTeam() {
+        return team;
     }
 
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
+    public void setTeam(Long team) {
+        this.team = team;
     }
 }

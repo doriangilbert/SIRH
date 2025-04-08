@@ -5,13 +5,13 @@ public class ObjectiveDTO {
     private Long id;
     private String description;
     private boolean achieved;
-    private Long evaluationId;
+    private Long evaluation;
 
-    public ObjectiveDTO(Long id, String description, boolean achieved, Long evaluationId) {
+    public ObjectiveDTO(Long id, String description, boolean achieved, Long evaluation) {
         this.id = id;
         this.description = description;
         this.achieved = achieved;
-        this.evaluationId = evaluationId;
+        this.evaluation = evaluation;
     }
 
     public Long getId() {
@@ -38,11 +38,11 @@ public class ObjectiveDTO {
         this.achieved = achieved;
     }
 
-    public Long getEvaluationId() {
-        return evaluationId;
+    public Long getEvaluation() {
+        return evaluation;
     }
 
-    public void setEvaluationId(Long evaluationId) {
-        this.evaluationId = evaluationId;
+    public void setEvaluation(Long evaluation) {
+        this.evaluation = evaluation;
     }
 }

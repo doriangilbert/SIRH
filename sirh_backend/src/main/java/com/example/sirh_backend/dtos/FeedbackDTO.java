@@ -4,14 +4,14 @@ public class FeedbackDTO {
 
     private Long id;
     private String description;
-    private Long reviewerId;
-    private Long evaluationId;
+    private Long reviewer;
+    private Long evaluation;
 
-    public FeedbackDTO(Long id, String description, Long reviewerId, Long evaluationId) {
+    public FeedbackDTO(Long id, String description, Long reviewer, Long evaluation) {
         this.id = id;
         this.description = description;
-        this.reviewerId = reviewerId;
-        this.evaluationId = evaluationId;
+        this.reviewer = reviewer;
+        this.evaluation = evaluation;
     }
 
     public Long getId() {
@@ -30,19 +30,19 @@ public class FeedbackDTO {
         this.description = description;
     }
 
-    public Long getReviewerId() {
-        return reviewerId;
+    public Long getReviewer() {
+        return reviewer;
     }
 
-    public void setReviewerId(Long reviewerId) {
-        this.reviewerId = reviewerId;
+    public void setReviewer(Long reviewer) {
+        this.reviewer = reviewer;
     }
 
-    public Long getEvaluationId() {
-        return evaluationId;
+    public Long getEvaluation() {
+        return evaluation;
     }
 
-    public void setEvaluationId(Long evaluationId) {
-        this.evaluationId = evaluationId;
+    public void setEvaluation(Long evaluation) {
+        this.evaluation = evaluation;
     }
 }

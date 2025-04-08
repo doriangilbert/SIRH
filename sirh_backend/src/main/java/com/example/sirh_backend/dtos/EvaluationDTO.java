@@ -8,18 +8,18 @@ public class EvaluationDTO {
     private int year;
     private String description;
     private String status;
-    private Long employeeId;
-    private List<Long> feedbacksIds;
-    private List<Long> objectivesIds;
+    private Long employee;
+    private List<Long> feedbacks;
+    private List<Long> objectives;
 
-    public EvaluationDTO(Long id, int year, String description, String status, Long employeeId, List<Long> feedbacksIds, List<Long> objectivesIds) {
+    public EvaluationDTO(Long id, int year, String description, String status, Long employee, List<Long> feedbacks, List<Long> objectives) {
         this.id = id;
         this.year = year;
         this.description = description;
         this.status = status;
-        this.employeeId = employeeId;
-        this.feedbacksIds = feedbacksIds;
-        this.objectivesIds = objectivesIds;
+        this.employee = employee;
+        this.feedbacks = feedbacks;
+        this.objectives = objectives;
     }
 
     public Long getId() {
@@ -54,27 +54,27 @@ public class EvaluationDTO {
         this.status = status;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Long employee) {
+        this.employee = employee;
     }
 
-    public List<Long> getFeedbacksIds() {
-        return feedbacksIds;
+    public List<Long> getFeedbacks() {
+        return feedbacks;
     }
 
-    public void setFeedbacksIds(List<Long> feedbacksIds) {
-        this.feedbacksIds = feedbacksIds;
+    public void setFeedbacks(List<Long> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 
-    public List<Long> getObjectivesIds() {
-        return objectivesIds;
+    public List<Long> getObjectives() {
+        return objectives;
     }
 
-    public void setObjectivesIds(List<Long> objectivesIds) {
-        this.objectivesIds = objectivesIds;
+    public void setObjectives(List<Long> objectives) {
+        this.objectives = objectives;
     }
 }
