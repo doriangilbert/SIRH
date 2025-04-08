@@ -18,13 +18,13 @@ public class LeaveRequestService {
 
     public List<LeaveRequestDTO> getAllLeaveRequests() {
         return leaveRequestRepository.findAll().stream()
-                .map(leave -> new LeaveRequestDTO(
-                        leave.getId(),
-                        leave.getStartDate().toString(),
-                        leave.getEndDate().toString(),
-                        leave.getStatus().toString(),
-                        leave.getEmployee().getId(),
-                        leave.getReviewer().getId()
+                .map(leaveRequest -> new LeaveRequestDTO(
+                        leaveRequest.getId(),
+                        leaveRequest.getStartDate().toString(),
+                        leaveRequest.getEndDate().toString(),
+                        leaveRequest.getStatus().toString(),
+                        leaveRequest.getEmployee().getId(),
+                        leaveRequest.getReviewer().getId()
                 ))
                 .toList();
     }
