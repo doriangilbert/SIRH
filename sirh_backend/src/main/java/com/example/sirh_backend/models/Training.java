@@ -18,14 +18,6 @@ public class Training {
 
     @ManyToMany
     @JoinTable(
-            name = "training_employee",
-            joinColumns = @JoinColumn(name = "training_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id")
-    )
-    private List<Employee> employees;
-
-    @ManyToMany
-    @JoinTable(
             name = "training_skill",
             joinColumns = @JoinColumn(name = "training_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id")
@@ -37,7 +29,6 @@ public class Training {
     public Training(String name, String description) {
         this.name = name;
         this.description = description;
-        this.employees = new ArrayList<>();
         this.skills = new ArrayList<>();
     }
 
@@ -61,14 +52,6 @@ public class Training {
         this.description = description;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
     public List<Skill> getSkills() {
         return skills;
     }
@@ -83,25 +66,8 @@ public class Training {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", employees=" + employees +
                 ", skills=" + skills +
                 '}';
-    }
-
-    public void addEmployee(Employee employee) {
-        if (this.employees.contains(employee)) {
-            throw new IllegalArgumentException("Employee already exists");
-        } else {
-            this.employees.add(employee);
-        }
-    }
-
-    public void removeEmployee(Employee employee) {
-        if (!this.employees.contains(employee)) {
-            throw new IllegalArgumentException("Employee does not exist");
-        } else {
-            this.employees.remove(employee);
-        }
     }
 
     public void addSkill(Skill skill) {

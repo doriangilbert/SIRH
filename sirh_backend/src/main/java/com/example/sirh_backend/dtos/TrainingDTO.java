@@ -7,14 +7,12 @@ public class TrainingDTO {
     private Long id;
     private String name;
     private String description;
-    private List<Long> employees;
     private List<Long> skills;
 
-    public TrainingDTO(Long id, String name, String description, List<Long> employees, List<Long> skills) {
+    public TrainingDTO(Long id, String name, String description, List<Long> skills) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.employees = employees;
         this.skills = skills;
     }
 
@@ -40,14 +38,6 @@ public class TrainingDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Long> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Long> employees) {
-        this.employees = employees;
     }
 
     public List<Long> getSkills() {

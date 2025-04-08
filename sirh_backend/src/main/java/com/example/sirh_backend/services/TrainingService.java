@@ -25,7 +25,6 @@ public class TrainingService {
                         training.getId(),
                         training.getName(),
                         training.getDescription(),
-                        training.getEmployees().stream().map(Employee::getId).collect(Collectors.toList()),
                         training.getSkills().stream().map(Skill::getId).collect(Collectors.toList())
                 ))
                 .collect(Collectors.toList());
@@ -38,7 +37,6 @@ public class TrainingService {
                     training.getId(),
                     training.getName(),
                     training.getDescription(),
-                    training.getEmployees().stream().map(Employee::getId).collect(Collectors.toList()),
                     training.getSkills().stream().map(Skill::getId).collect(Collectors.toList())
             );
         }
