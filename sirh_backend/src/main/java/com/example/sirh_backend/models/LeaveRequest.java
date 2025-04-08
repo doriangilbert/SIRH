@@ -22,6 +22,10 @@ public class LeaveRequest {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @ManyToOne
+    @JoinColumn(name = "reviewer_id")
+    private Employee reviewer;
+
     public LeaveRequest() {}
 
     public LeaveRequest(LocalDate startDate, LocalDate endDate, Employee employee) {
@@ -67,6 +71,14 @@ public class LeaveRequest {
         this.employee = employee;
     }
 
+    public Employee getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(Employee reviewer) {
+        this.reviewer = reviewer;
+    }
+
     @Override
     public String toString() {
         return "LeaveRequest{" +
@@ -75,6 +87,7 @@ public class LeaveRequest {
                 ", endDate=" + endDate +
                 ", status=" + status +
                 ", employee=" + employee +
+                ", reviewer=" + reviewer +
                 '}';
     }
 }

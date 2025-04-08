@@ -145,6 +145,10 @@ public class MainController {
                 LocalDate startDate = LocalDate.of(2025, (int) (Math.random() * 12) + 1, (int) (Math.random() * 28) + 1);
                 LocalDate endDate = startDate.plusDays((int) (Math.random() * 10) + 1);
                 LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
+                Team team = employee.getTeam();
+                if (team != null && team.getManager() != null) {
+                    leaveRequest.setReviewer(team.getManager());
+                }
                 leaveRequestRepository.save(leaveRequest);
                 int leaveDuration = (int) (endDate.toEpochDay() - startDate.toEpochDay()) + 1;
                 employee.setLeaveBalance(employee.getLeaveBalance() - leaveDuration);

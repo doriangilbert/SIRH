@@ -7,13 +7,15 @@ public class LeaveRequestDTO {
     private String endDate;
     private String status;
     private Long employee;
+    private Long reviewer;
 
-    public LeaveRequestDTO(Long id, String startDate, String endDate, String status, Long employee) {
+    public LeaveRequestDTO(Long id, String startDate, String endDate, String status, Long employee, Long reviewer) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.employee = employee;
+        this.reviewer = reviewer;
     }
 
     public Long getId() {
@@ -54,5 +56,13 @@ public class LeaveRequestDTO {
 
     public void setEmployee(Long employee) {
         this.employee = employee;
+    }
+
+    public Long getReviewer() {
+        return reviewer;
+    }
+
+    public void setReviewer(Long reviewer) {
+        this.reviewer = reviewer;
     }
 }

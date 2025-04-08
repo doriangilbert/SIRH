@@ -23,7 +23,8 @@ public class LeaveRequestService {
                         leave.getStartDate().toString(),
                         leave.getEndDate().toString(),
                         leave.getStatus().toString(),
-                        leave.getEmployee().getId()
+                        leave.getEmployee().getId(),
+                        leave.getReviewer().getId()
                 ))
                 .toList();
     }
@@ -36,7 +37,8 @@ public class LeaveRequestService {
                     leaveRequest.getStartDate().toString(),
                     leaveRequest.getEndDate().toString(),
                     leaveRequest.getStatus().toString(),
-                    leaveRequest.getEmployee().getId()
+                    leaveRequest.getEmployee().getId(),
+                    leaveRequest.getReviewer().getId()
             );
         }
         return null;
