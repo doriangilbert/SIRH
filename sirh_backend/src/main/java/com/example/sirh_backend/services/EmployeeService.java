@@ -52,4 +52,18 @@ public class EmployeeService {
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
+
+    public Employee updateEmployee(long id, Employee updatedEmployee) {
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if (employee != null) {
+            employee.setFirstName(updatedEmployee.getFirstName());
+            employee.setLastName(updatedEmployee.getLastName());
+            employee.setLeaveBalance(updatedEmployee.getLeaveBalance());
+            employee.setPosition(updatedEmployee.getPosition());
+            employee.setSkills(updatedEmployee.getSkills());
+            employee.setTeam(updatedEmployee.getTeam());
+            return employeeRepository.save(employee);
+        }
+        return null;
+    }
 }
