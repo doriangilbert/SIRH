@@ -45,4 +45,15 @@ public class TeamService {
     public Team createTeam(Team team) {
         return teamRepository.save(team);
     }
+
+    public Team updateTeam(long id, Team updatedTeam) {
+        Team team = teamRepository.findById(id).orElse(null);
+        if (team != null) {
+            team.setName(updatedTeam.getName());
+            team.setEmployees(updatedTeam.getEmployees());
+            team.setManager(updatedTeam.getManager());
+            return teamRepository.save(team);
+        }
+        return null;
+    }
 }

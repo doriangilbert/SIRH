@@ -31,4 +31,9 @@ public class TeamController {
     public Team createTeam(@RequestBody Team team) {
         return teamService.createTeam(team);
     }
+
+    @PutMapping("/teams/{id}")
+    public Team updateTeam(@PathVariable long id, @RequestBody Team team) {
+        return teamService.updateTeam(id, team);
+    }
 }
