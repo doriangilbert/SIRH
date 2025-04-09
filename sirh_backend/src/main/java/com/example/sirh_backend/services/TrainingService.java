@@ -46,4 +46,15 @@ public class TrainingService {
     public Training createTraining(Training training) {
         return trainingRepository.save(training);
     }
+
+    public Training updateTraining(long id, Training updatedTraining) {
+        Training training = trainingRepository.findById(id).orElse(null);
+        if (training != null) {
+            training.setName(updatedTraining.getName());
+            training.setDescription(updatedTraining.getDescription());
+            training.setSkills(updatedTraining.getSkills());
+            return trainingRepository.save(training);
+        }
+        return null;
+    }
 }

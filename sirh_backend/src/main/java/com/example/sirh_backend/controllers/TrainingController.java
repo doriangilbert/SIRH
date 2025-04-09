@@ -31,4 +31,9 @@ public class TrainingController {
     public Training createTraining(@RequestBody Training training) {
         return trainingService.createTraining(training);
     }
+
+    @PutMapping("/trainings/{id}")
+    public Training updateTraining(@PathVariable long id, @RequestBody Training training) {
+        return trainingService.updateTraining(id, training);
+    }
 }
