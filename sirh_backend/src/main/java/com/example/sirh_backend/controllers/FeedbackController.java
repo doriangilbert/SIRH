@@ -31,4 +31,9 @@ public class FeedbackController {
     public Feedback createFeedback(@RequestBody Feedback feedback) {
         return feedbackService.createFeedback(feedback);
     }
+
+    @PutMapping("/feedbacks/{id}")
+    public Feedback updateFeedback(@PathVariable long id, @RequestBody Feedback feedback) {
+        return feedbackService.updateFeedback(id, feedback);
+    }
 }

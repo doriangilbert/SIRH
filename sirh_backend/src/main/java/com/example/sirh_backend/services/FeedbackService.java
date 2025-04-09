@@ -43,4 +43,15 @@ public class FeedbackService {
     public Feedback createFeedback(Feedback feedback) {
         return feedbackRepository.save(feedback);
     }
+
+    public Feedback updateFeedback(long id, Feedback updatedFeedback) {
+        Feedback feedback = feedbackRepository.findById(id).orElse(null);
+        if (feedback != null) {
+            feedback.setDescription(updatedFeedback.getDescription());
+            feedback.setReviewer(updatedFeedback.getReviewer());
+            feedback.setEvaluation(updatedFeedback.getEvaluation());
+            return feedbackRepository.save(feedback);
+        }
+        return null;
+    }
 }
