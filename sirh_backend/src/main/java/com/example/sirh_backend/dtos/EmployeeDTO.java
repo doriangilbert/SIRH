@@ -8,17 +8,15 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private int leaveBalance;
-    private List<Long> leaveRequests;
     private Long position;
     private List<Long> skills;
     private Long team;
 
-    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, List<Long> leaveRequests, Long position, List<Long> skills, Long team) {
+    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, Long position, List<Long> skills, Long team) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.leaveBalance = leaveBalance;
-        this.leaveRequests = leaveRequests;
         this.position = position;
         this.skills = skills;
         this.team = team;
@@ -54,14 +52,6 @@ public class EmployeeDTO {
 
     public void setLeaveBalance(int leaveBalance) {
         this.leaveBalance = leaveBalance;
-    }
-
-    public List<Long> getLeaveRequests() {
-        return leaveRequests;
-    }
-
-    public void setLeaveRequests(List<Long> leaveRequests) {
-        this.leaveRequests = leaveRequests;
     }
 
     public Long getPosition() {

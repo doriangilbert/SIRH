@@ -26,7 +26,6 @@ public class EmployeeService {
                         employee.getFirstName(),
                         employee.getLastName(),
                         employee.getLeaveBalance(),
-                        employee.getLeaveRequests().stream().map(LeaveRequest::getId).collect(Collectors.toList()),
                         employee.getPosition().getId(),
                         employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()),
                         employee.getTeam().getId()
@@ -42,7 +41,6 @@ public class EmployeeService {
                     employee.getFirstName(),
                     employee.getLastName(),
                     employee.getLeaveBalance(),
-                    employee.getLeaveRequests().stream().map(LeaveRequest::getId).collect(Collectors.toList()),
                     employee.getPosition().getId(),
                     employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()),
                     employee.getTeam().getId()

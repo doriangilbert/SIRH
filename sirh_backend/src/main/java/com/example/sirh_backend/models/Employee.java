@@ -18,9 +18,6 @@ public class Employee {
 
     private int leaveBalance;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<LeaveRequest> leaveRequests;
-
     @ManyToOne
     @JoinColumn(name = "position_id")
     private Position position;
@@ -43,7 +40,6 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.leaveBalance = 0;
-        this.leaveRequests = new ArrayList<>();
         this.position = position;
         this.skills = new ArrayList<>();
         this.team = team;
@@ -77,14 +73,6 @@ public class Employee {
         this.leaveBalance = leaveBalance;
     }
 
-    public List<LeaveRequest> getLeaveRequests() {
-        return leaveRequests;
-    }
-
-    public void setLeaveRequests(List<LeaveRequest> leaveRequests) {
-        this.leaveRequests = leaveRequests;
-    }
-
     public Position getPosition() {
         return position;
     }
@@ -116,27 +104,10 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", leaveBalance=" + leaveBalance +
-                ", leaveRequests=" + leaveRequests +
                 ", position=" + position +
                 ", skills=" + skills +
                 ", team=" + team +
                 '}';
-    }
-
-    public void addLeaveRequest(LeaveRequest leaveRequest) {
-        if (this.leaveRequests.contains(leaveRequest)) {
-            throw new IllegalArgumentException("LeaveRequest already exists");
-        } else {
-            this.leaveRequests.add(leaveRequest);
-        }
-    }
-
-    public void removeLeaveRequest(LeaveRequest leaveRequest) {
-        if (!this.leaveRequests.contains(leaveRequest)) {
-            throw new IllegalArgumentException("LeaveRequest does not exist");
-        } else {
-            this.leaveRequests.remove(leaveRequest);
-        }
     }
 
     public void addSkill(Skill skill) {
