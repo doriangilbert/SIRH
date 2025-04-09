@@ -31,4 +31,9 @@ public class EvaluationController {
     public Evaluation createEvaluation(@RequestBody Evaluation evaluation) {
         return evaluationService.createEvaluation(evaluation);
     }
+
+    @PutMapping("/evaluations/{id}")
+    public Evaluation updateEvaluation(@PathVariable long id, @RequestBody Evaluation evaluation) {
+        return evaluationService.updateEvaluation(id, evaluation);
+    }
 }

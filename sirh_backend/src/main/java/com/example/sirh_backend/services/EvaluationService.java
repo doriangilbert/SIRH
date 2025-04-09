@@ -52,4 +52,18 @@ public class EvaluationService {
     public Evaluation createEvaluation(Evaluation evaluation) {
         return evaluationRepository.save(evaluation);
     }
+
+    public Evaluation updateEvaluation(long id, Evaluation updatedEvaluation) {
+        Evaluation evaluation = evaluationRepository.findById(id).orElse(null);
+        if (evaluation != null) {
+            evaluation.setYear(updatedEvaluation.getYear());
+            evaluation.setDescription(updatedEvaluation.getDescription());
+            evaluation.setStatus(updatedEvaluation.getStatus());
+            evaluation.setEmployee(updatedEvaluation.getEmployee());
+            evaluation.setFeedbacks(updatedEvaluation.getFeedbacks());
+            evaluation.setObjectives(updatedEvaluation.getObjectives());
+            return evaluationRepository.save(evaluation);
+        }
+        return null;
+    }
 }
