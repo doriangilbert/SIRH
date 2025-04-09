@@ -39,4 +39,13 @@ public class PositionService {
     public Position createPosition(Position position) {
         return positionRepository.save(position);
     }
+
+    public Position updatePosition(long id, Position updatedPosition) {
+        Position position = positionRepository.findById(id).orElse(null);
+        if (position != null) {
+            position.setName(updatedPosition.getName());
+            return positionRepository.save(position);
+        }
+        return null;
+    }
 }

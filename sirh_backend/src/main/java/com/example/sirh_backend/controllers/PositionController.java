@@ -31,4 +31,9 @@ public class PositionController {
     public Position createPosition(@RequestBody Position position) {
         return positionService.createPosition(position);
     }
+
+    @PutMapping("/positions/{id}")
+    public Position updatePosition(@PathVariable long id, @RequestBody Position position) {
+        return positionService.updatePosition(id, position);
+    }
 }
