@@ -39,4 +39,13 @@ public class SkillService {
     public Skill createSkill(Skill skill) {
         return skillRepository.save(skill);
     }
+
+    public Skill updateSkill(long id, Skill updatedSkill) {
+        Skill skill = skillRepository.findById(id).orElse(null);
+        if (skill != null) {
+            skill.setName(updatedSkill.getName());
+            return skillRepository.save(skill);
+        }
+        return null;
+    }
 }
