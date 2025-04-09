@@ -31,4 +31,9 @@ public class TrainingRequestController {
     public TrainingRequest createTrainingRequest(@RequestBody TrainingRequest trainingRequest) {
         return trainingRequestService.createTrainingRequest(trainingRequest);
     }
+
+    @PutMapping("/trainingrequests/{id}")
+    public TrainingRequest updateTrainingRequest(@PathVariable long id, @RequestBody TrainingRequest trainingRequest) {
+        return trainingRequestService.updateTrainingRequest(id, trainingRequest);
+    }
 }

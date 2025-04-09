@@ -45,4 +45,16 @@ public class TrainingRequestService {
     public TrainingRequest createTrainingRequest(TrainingRequest trainingRequest) {
         return trainingRequestRepository.save(trainingRequest);
     }
+
+    public TrainingRequest updateTrainingRequest(long id, TrainingRequest updatedTrainingRequest) {
+        TrainingRequest trainingRequest = trainingRequestRepository.findById(id).orElse(null);
+        if (trainingRequest != null) {
+            trainingRequest.setStatus(updatedTrainingRequest.getStatus());
+            trainingRequest.setTraining(updatedTrainingRequest.getTraining());
+            trainingRequest.setEmployee(updatedTrainingRequest.getEmployee());
+            trainingRequest.setReviewer(updatedTrainingRequest.getReviewer());
+            return trainingRequestRepository.save(trainingRequest);
+        }
+        return null;
+    }
 }
