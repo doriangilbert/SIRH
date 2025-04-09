@@ -31,4 +31,9 @@ public class LeaveRequestController {
     public LeaveRequest createLeaveRequest(@RequestBody LeaveRequest leaveRequest) {
         return leaveRequestService.createLeaveRequest(leaveRequest);
     }
+
+    @PutMapping("/leaverequests/{id}")
+    public LeaveRequest updateLeaveRequest(@PathVariable long id, @RequestBody LeaveRequest leaveRequest) {
+        return leaveRequestService.updateLeaveRequest(id, leaveRequest);
+    }
 }

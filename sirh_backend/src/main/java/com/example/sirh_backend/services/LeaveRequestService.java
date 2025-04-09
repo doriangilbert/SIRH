@@ -47,4 +47,17 @@ public class LeaveRequestService {
     public LeaveRequest createLeaveRequest(LeaveRequest leaveRequest) {
         return leaveRequestRepository.save(leaveRequest);
     }
+
+    public LeaveRequest updateLeaveRequest(long id, LeaveRequest updatedLeaveRequest) {
+        LeaveRequest leaveRequest = leaveRequestRepository.findById(id).orElse(null);
+        if (leaveRequest != null) {
+            leaveRequest.setStartDate(updatedLeaveRequest.getStartDate());
+            leaveRequest.setEndDate(updatedLeaveRequest.getEndDate());
+            leaveRequest.setStatus(updatedLeaveRequest.getStatus());
+            leaveRequest.setEmployee(updatedLeaveRequest.getEmployee());
+            leaveRequest.setReviewer(updatedLeaveRequest.getReviewer());
+            return leaveRequestRepository.save(leaveRequest);
+        }
+        return null;
+    }
 }
