@@ -31,4 +31,9 @@ public class ObjectiveController {
     public Objective createObjective(@RequestBody Objective objective) {
         return objectiveService.createObjective(objective);
     }
+
+    @PutMapping("/objectives/{id}")
+    public Objective updateObjective(@PathVariable long id, @RequestBody Objective objective) {
+        return objectiveService.updateObjective(id, objective);
+    }
 }

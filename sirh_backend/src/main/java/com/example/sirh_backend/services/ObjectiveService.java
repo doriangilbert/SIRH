@@ -43,4 +43,15 @@ public class ObjectiveService {
     public Objective createObjective(Objective objective) {
         return objectiveRepository.save(objective);
     }
+
+    public Objective updateObjective(long id, Objective updatedObjective) {
+        Objective objective = objectiveRepository.findById(id).orElse(null);
+        if (objective != null) {
+            objective.setDescription(updatedObjective.getDescription());
+            objective.setAchieved(updatedObjective.isAchieved());
+            objective.setEvaluation(updatedObjective.getEvaluation());
+            return objectiveRepository.save(objective);
+        }
+        return null;
+    }
 }
