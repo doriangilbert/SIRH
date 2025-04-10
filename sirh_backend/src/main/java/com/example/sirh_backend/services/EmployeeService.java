@@ -7,6 +7,7 @@ import com.example.sirh_backend.models.Skill;
 import com.example.sirh_backend.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final LeaveRequestService leaveRequestService;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService) {
         this.employeeRepository = employeeRepository;
+        this.leaveRequestService = leaveRequestService;
     }
 
     public List<EmployeeDTO> getAllEmployees() {
@@ -65,5 +68,31 @@ public class EmployeeService {
             return employeeRepository.save(employee);
         }
         return null;
+    }
+
+    public LeaveRequest makeLeaveRequest(long employeeId, LocalDate startDate, LocalDate endDate) {
+        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        if (employee != null) {
+            if (!endDate.isBefore(startDate)) {
+                long leaveDuration = startDate.until(endDate).getDays() + 1;
+                if (employee.getLeaveBalance() >= leaveDuration) {
+                    employee.setLeaveBalance((int) (employee.getLeaveBalance() - leaveDuration));
+                    updateEmployee(employeeId, employee);
+                    LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
+                    if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
+                        leaveRequest.setReviewer(employee.getTeam().getManager());
+                    } else {
+                        throw new RuntimeException("No manager found for the employee's team");
+                    }
+                    return leaveRequestService.createLeaveRequest(leaveRequest);
+                } else {
+                    throw new RuntimeException("Insufficient leave balance");
+                }
+            } else {
+                throw new IllegalArgumentException("End date must be after start date");
+            }
+        } else {
+            throw new IllegalArgumentException("Employee does not exist");
+        }
     }
 }
