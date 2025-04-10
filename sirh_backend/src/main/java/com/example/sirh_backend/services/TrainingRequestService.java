@@ -1,6 +1,7 @@
 package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.dtos.TrainingRequestDTO;
+import com.example.sirh_backend.models.RequestStatus;
 import com.example.sirh_backend.models.TrainingRequest;
 import com.example.sirh_backend.repositories.TrainingRequestRepository;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,33 @@ public class TrainingRequestService {
             return trainingRequestRepository.save(trainingRequest);
         }
         return null;
+    }
+
+    public TrainingRequest approveTrainingRequest(long id, long reviewerId) {
+        TrainingRequest trainingRequest = trainingRequestRepository.findById(id).orElse(null);
+        if (trainingRequest != null) {
+            if (trainingRequest.getReviewer().getId() == reviewerId) {
+                trainingRequest.setStatus(RequestStatus.APPROVED);
+                return updateTrainingRequest(id, trainingRequest);
+            } else {
+                throw new IllegalStateException("Employee is not the reviewer");
+            }
+        } else {
+            throw new IllegalStateException("Training request not found");
+        }
+    }
+
+    public TrainingRequest refuseTrainingRequest(long id, long reviewerId) {
+        TrainingRequest trainingRequest = trainingRequestRepository.findById(id).orElse(null);
+        if (trainingRequest != null) {
+            if (trainingRequest.getReviewer().getId() == reviewerId) {
+                trainingRequest.setStatus(RequestStatus.REFUSED);
+                return updateTrainingRequest(id, trainingRequest);
+            } else {
+                throw new IllegalStateException("Employee is not the reviewer");
+            }
+        } else {
+            throw new IllegalStateException("Training request not found");
+        }
     }
 }
