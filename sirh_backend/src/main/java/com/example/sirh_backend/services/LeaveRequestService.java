@@ -2,6 +2,7 @@ package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.dtos.LeaveRequestDTO;
 import com.example.sirh_backend.models.LeaveRequest;
+import com.example.sirh_backend.models.RequestStatus;
 import com.example.sirh_backend.repositories.LeaveRequestRepository;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +60,33 @@ public class LeaveRequestService {
             return leaveRequestRepository.save(leaveRequest);
         }
         return null;
+    }
+
+    public LeaveRequest approveLeaveRequest(long id, long reviewerId) {
+        LeaveRequest leaveRequest = leaveRequestRepository.findById(id).orElse(null);
+        if (leaveRequest != null) {
+            if (leaveRequest.getReviewer().getId() == reviewerId) {
+                leaveRequest.setStatus(RequestStatus.APPROVED);
+                return updateLeaveRequest(id, leaveRequest);
+            } else {
+                throw new IllegalArgumentException("Employee is not the reviewer");
+            }
+        } else {
+            throw new IllegalArgumentException("Leave request does not exist");
+        }
+    }
+
+    public LeaveRequest refuseLeaveRequest(long id, long reviewerId) {
+        LeaveRequest leaveRequest = leaveRequestRepository.findById(id).orElse(null);
+        if (leaveRequest != null) {
+            if (leaveRequest.getReviewer().getId() == reviewerId) {
+                leaveRequest.setStatus(RequestStatus.REFUSED);
+                return updateLeaveRequest(id, leaveRequest);
+            } else {
+                throw new IllegalArgumentException("Employee is not the reviewer");
+            }
+        } else {
+            throw new IllegalArgumentException("Leave request does not exist");
+        }
     }
 }
