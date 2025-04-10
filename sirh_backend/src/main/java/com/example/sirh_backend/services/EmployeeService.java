@@ -1,10 +1,9 @@
 package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.dtos.EmployeeDTO;
-import com.example.sirh_backend.models.Employee;
-import com.example.sirh_backend.models.LeaveRequest;
-import com.example.sirh_backend.models.Skill;
+import com.example.sirh_backend.models.*;
 import com.example.sirh_backend.repositories.EmployeeRepository;
+import com.example.sirh_backend.repositories.TrainingRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,10 +15,14 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final LeaveRequestService leaveRequestService;
+    private final TrainingRepository trainingRepository;
+    private final TrainingRequestService trainingRequestService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService) {
+    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService, TrainingRepository trainingRepository, TrainingRequestService trainingRequestService) {
         this.employeeRepository = employeeRepository;
         this.leaveRequestService = leaveRequestService;
+        this.trainingRepository = trainingRepository;
+        this.trainingRequestService = trainingRequestService;
     }
 
     public List<EmployeeDTO> getAllEmployees() {
@@ -93,6 +96,26 @@ public class EmployeeService {
             }
         } else {
             throw new IllegalArgumentException("Employee does not exist");
+        }
+    }
+
+    public TrainingRequest makeTrainingRequest(long trainingId, long employeeId) {
+        Training training = trainingRepository.findById(trainingId).orElse(null);
+        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        if (training != null) {
+            if (employee != null) {
+                TrainingRequest trainingRequest = new TrainingRequest(training, employee);
+                if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
+                    trainingRequest.setReviewer(employee.getTeam().getManager());
+                } else {
+                    throw new RuntimeException("No manager found for the employee's team");
+                }
+                return trainingRequestService.createTrainingRequest(trainingRequest);
+            } else {
+                throw new IllegalArgumentException("Employee does not exist");
+            }
+        } else {
+            throw new IllegalArgumentException("Training does not exist");
         }
     }
 }
