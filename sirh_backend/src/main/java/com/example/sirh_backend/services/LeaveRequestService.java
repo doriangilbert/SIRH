@@ -81,6 +81,10 @@ public class LeaveRequestService {
         if (leaveRequest != null) {
             if (leaveRequest.getReviewer().getId() == reviewerId) {
                 leaveRequest.setStatus(RequestStatus.REFUSED);
+                long leaveDuration = leaveRequest.getStartDate().until(leaveRequest.getEndDate()).getDays() + 1;
+                leaveRequest.getEmployee().setLeaveBalance(
+                        leaveRequest.getEmployee().getLeaveBalance() + (int) leaveDuration
+                );
                 return updateLeaveRequest(id, leaveRequest);
             } else {
                 throw new IllegalArgumentException("Employee is not the reviewer");
