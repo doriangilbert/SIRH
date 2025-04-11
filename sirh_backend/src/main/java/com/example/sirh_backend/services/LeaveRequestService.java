@@ -1,6 +1,5 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.dtos.LeaveRequestDTO;
 import com.example.sirh_backend.models.LeaveRequest;
 import com.example.sirh_backend.models.RequestStatus;
 import com.example.sirh_backend.repositories.LeaveRequestRepository;
@@ -17,32 +16,12 @@ public class LeaveRequestService {
         this.leaveRequestRepository = leaveRequestRepository;
     }
 
-    public List<LeaveRequestDTO> getAllLeaveRequests() {
-        return leaveRequestRepository.findAll().stream()
-                .map(leaveRequest -> new LeaveRequestDTO(
-                        leaveRequest.getId(),
-                        leaveRequest.getStartDate().toString(),
-                        leaveRequest.getEndDate().toString(),
-                        leaveRequest.getStatus().toString(),
-                        leaveRequest.getEmployee().getId(),
-                        leaveRequest.getReviewer().getId()
-                ))
-                .toList();
+    public List<LeaveRequest> getAllLeaveRequests() {
+        return leaveRequestRepository.findAll();
     }
 
-    public LeaveRequestDTO getLeaveRequestById(long id) {
-        LeaveRequest leaveRequest = leaveRequestRepository.findById(id).orElse(null);
-        if (leaveRequest != null) {
-            return new LeaveRequestDTO(
-                    leaveRequest.getId(),
-                    leaveRequest.getStartDate().toString(),
-                    leaveRequest.getEndDate().toString(),
-                    leaveRequest.getStatus().toString(),
-                    leaveRequest.getEmployee().getId(),
-                    leaveRequest.getReviewer().getId()
-            );
-        }
-        return null;
+    public LeaveRequest getLeaveRequestById(long id) {
+        return leaveRequestRepository.findById(id).orElse(null);
     }
 
     public LeaveRequest createLeaveRequest(LeaveRequest leaveRequest) {
