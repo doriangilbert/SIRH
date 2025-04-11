@@ -1,6 +1,5 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.dtos.PositionDTO;
 import com.example.sirh_backend.models.Position;
 import com.example.sirh_backend.repositories.PositionRepository;
 import org.springframework.stereotype.Service;
@@ -16,24 +15,12 @@ public class PositionService {
         this.positionRepository = positionRepository;
     }
 
-    public List<PositionDTO> getAllPositions() {
-        return positionRepository.findAll().stream()
-                .map(position -> new PositionDTO(
-                        position.getId(),
-                        position.getName()
-                ))
-                .toList();
+    public List<Position> getAllPositions() {
+        return positionRepository.findAll();
     }
 
-    public PositionDTO getPositionById(long id) {
-        Position position = positionRepository.findById(id).orElse(null);
-        if (position != null) {
-            return new PositionDTO(
-                    position.getId(),
-                    position.getName()
-            );
-        }
-        return null;
+    public Position getPositionById(long id) {
+        return positionRepository.findById(id).orElse(null);
     }
 
     public Position createPosition(Position position) {
