@@ -1,6 +1,7 @@
 package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.TeamDTO;
+import com.example.sirh_backend.mappers.TeamMapper;
 import com.example.sirh_backend.models.Team;
 import com.example.sirh_backend.services.TeamService;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ public class TeamController {
 
     @GetMapping("/teams")
     public List<TeamDTO> getAllTeams() {
-        return teamService.getAllTeams();
+        return TeamMapper.toDTO(teamService.getAllTeams());
     }
 
     @GetMapping("/teams/{id}")
     public TeamDTO getTeamById(@PathVariable long id) {
-        return teamService.getTeamById(id);
+        return TeamMapper.toDTO(teamService.getTeamById(id));
     }
 
     @PostMapping("/teams")
