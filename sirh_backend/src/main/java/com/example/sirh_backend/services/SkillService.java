@@ -1,6 +1,5 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.dtos.SkillDTO;
 import com.example.sirh_backend.models.Skill;
 import com.example.sirh_backend.repositories.SkillRepository;
 import org.springframework.stereotype.Service;
@@ -16,24 +15,12 @@ public class SkillService {
         this.skillRepository = skillRepository;
     }
 
-    public List<SkillDTO> getAllSkills() {
-        return skillRepository.findAll().stream()
-                .map(skill -> new SkillDTO(
-                        skill.getId(),
-                        skill.getName()
-                ))
-                .toList();
+    public List<Skill> getAllSkills() {
+        return skillRepository.findAll();
     }
 
-    public SkillDTO getSkillById(long id) {
-        Skill skill = skillRepository.findById(id).orElse(null);
-        if (skill != null) {
-            return new SkillDTO(
-                    skill.getId(),
-                    skill.getName()
-            );
-        }
-        return null;
+    public Skill getSkillById(long id) {
+        return skillRepository.findById(id).orElse(null);
     }
 
     public Skill createSkill(Skill skill) {
