@@ -1,6 +1,7 @@
 package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.TrainingDTO;
+import com.example.sirh_backend.mappers.TrainingMapper;
 import com.example.sirh_backend.models.Training;
 import com.example.sirh_backend.services.TrainingService;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ public class TrainingController {
 
     @GetMapping("/trainings")
     public List<TrainingDTO> getAllTrainings() {
-        return trainingService.getAllTrainings();
+        return TrainingMapper.toDTO(trainingService.getAllTrainings());
     }
 
     @GetMapping("/trainings/{id}")
     public TrainingDTO getTrainingById(@PathVariable long id) {
-        return trainingService.getTrainingById(id);
+        return TrainingMapper.toDTO(trainingService.getTrainingById(id));
     }
 
     @PostMapping("/trainings")
