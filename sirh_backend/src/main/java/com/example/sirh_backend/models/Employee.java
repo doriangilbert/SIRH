@@ -34,6 +34,9 @@ public class Employee {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<Notification> notifications;
+
     public Employee() {}
 
     public Employee(String firstName, String lastName, Position position, Team team) {
@@ -43,6 +46,7 @@ public class Employee {
         this.position = position;
         this.skills = new ArrayList<>();
         this.team = team;
+        this.notifications = new ArrayList<>();
     }
 
     public Long getId() {
@@ -97,6 +101,14 @@ public class Employee {
         this.team = team;
     }
 
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -107,6 +119,7 @@ public class Employee {
                 ", position=" + position +
                 ", skills=" + skills +
                 ", team=" + team +
+                ", notifications=" + notifications +
                 '}';
     }
 
@@ -123,6 +136,22 @@ public class Employee {
             throw new IllegalArgumentException("Skill does not exist");
         } else {
             this.skills.remove(skill);
+        }
+    }
+
+    public void addNotification(Notification notification) {
+        if (this.notifications.contains(notification)) {
+            throw new IllegalArgumentException("Notification already exists");
+        } else {
+            this.notifications.add(notification);
+        }
+    }
+
+    public void removeNotification(Notification notification) {
+        if (!this.notifications.contains(notification)) {
+            throw new IllegalArgumentException("Notification does not exist");
+        } else {
+            this.notifications.remove(notification);
         }
     }
 }

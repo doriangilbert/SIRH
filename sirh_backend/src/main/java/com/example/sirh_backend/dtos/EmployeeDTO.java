@@ -11,8 +11,9 @@ public class EmployeeDTO {
     private Long position;
     private List<Long> skills;
     private Long team;
+    private List<Long> notifications;
 
-    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, Long position, List<Long> skills, Long team) {
+    public EmployeeDTO(Long id, String firstName, String lastName, int leaveBalance, Long position, List<Long> skills, Long team, List<Long> notifications) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +21,7 @@ public class EmployeeDTO {
         this.position = position;
         this.skills = skills;
         this.team = team;
+        this.notifications = notifications;
     }
 
     public Long getId() {
@@ -76,5 +78,13 @@ public class EmployeeDTO {
 
     public void setTeam(Long team) {
         this.team = team;
+    }
+
+    public List<Long> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Long> notifications) {
+        this.notifications = notifications;
     }
 }

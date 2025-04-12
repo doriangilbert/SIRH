@@ -47,6 +47,7 @@ public class EmployeeService {
             employee.setPosition(updatedEmployee.getPosition());
             employee.setSkills(updatedEmployee.getSkills());
             employee.setTeam(updatedEmployee.getTeam());
+            employee.setNotifications(updatedEmployee.getNotifications());
             return employeeRepository.save(employee);
         }
         return null;

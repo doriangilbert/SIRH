@@ -2,6 +2,7 @@ package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.EmployeeDTO;
 import com.example.sirh_backend.models.Employee;
+import com.example.sirh_backend.models.Notification;
 import com.example.sirh_backend.models.Skill;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,8 @@ public class EmployeeMapper {
                     employee.getLeaveBalance(),
                     employee.getPosition().getId(),
                     employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()),
-                    employee.getTeam().getId()
+                    employee.getTeam().getId(),
+                    employee.getNotifications().stream().map(Notification::getId).collect(Collectors.toList())
             );
         }
         return null;
