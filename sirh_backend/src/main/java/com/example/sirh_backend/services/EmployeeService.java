@@ -1,9 +1,6 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.Employee;
-import com.example.sirh_backend.models.LeaveRequest;
-import com.example.sirh_backend.models.Training;
-import com.example.sirh_backend.models.TrainingRequest;
+import com.example.sirh_backend.models.*;
 import com.example.sirh_backend.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +14,14 @@ public class EmployeeService {
     private final LeaveRequestService leaveRequestService;
     private final TrainingService trainingService;
     private final TrainingRequestService trainingRequestService;
+    private final NotificationService notificationService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService, TrainingService trainingService, TrainingRequestService trainingRequestService) {
+    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService, TrainingService trainingService, TrainingRequestService trainingRequestService, NotificationService notificationService) {
         this.employeeRepository = employeeRepository;
         this.leaveRequestService = leaveRequestService;
         this.trainingService = trainingService;
         this.trainingRequestService = trainingRequestService;
-
+        this.notificationService = notificationService;
     }
 
     public List<Employee> getAllEmployees() {
@@ -64,6 +62,15 @@ public class EmployeeService {
                     LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
                     if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                         leaveRequest.setReviewer(employee.getTeam().getManager());
+                        notificationService.createNotification(new Notification(
+                                "New leave request",
+                                "You have a new leave request to review.\n" +
+                                        "Details:\n" +
+                                        "- Leave Request ID: " + leaveRequest.getId() + "\n" +
+                                        "- Employee ID: " + employee.getId() + "\n" +
+                                        "- Start Date: " + startDate + "\n" +
+                                        "- End Date: " + endDate,
+                                employee.getTeam().getManager()));
                     } else {
                         throw new RuntimeException("No manager found for the employee's team");
                     }
@@ -87,6 +94,15 @@ public class EmployeeService {
                 TrainingRequest trainingRequest = new TrainingRequest(training, employee);
                 if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                     trainingRequest.setReviewer(employee.getTeam().getManager());
+                    notificationService.createNotification(new Notification(
+                            "New training request",
+                            "You have a new training request to review.\n" +
+                                    "Details:\n" +
+                                    "- Training Request ID: " + trainingRequest.getId() + "\n" +
+                                    "- Employee ID: " + employee.getId() + "\n" +
+                                    "- Training ID: " + training.getId() + "\n" +
+                                    "- Training Name: " + training.getName(),
+                            employee.getTeam().getManager()));
                 } else {
                     throw new RuntimeException("No manager found for the employee's team");
                 }
