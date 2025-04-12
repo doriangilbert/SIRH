@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.models.Notification;
 import com.example.sirh_backend.models.RequestStatus;
 import com.example.sirh_backend.models.TrainingRequest;
 import com.example.sirh_backend.repositories.TrainingRequestRepository;
@@ -11,9 +12,11 @@ import java.util.List;
 public class TrainingRequestService {
 
     private final TrainingRequestRepository trainingRequestRepository;
+    private final NotificationService notificationService;
 
-    public TrainingRequestService(TrainingRequestRepository trainingRequestRepository) {
+    public TrainingRequestService(TrainingRequestRepository trainingRequestRepository, NotificationService notificationService) {
         this.trainingRequestRepository = trainingRequestRepository;
+        this.notificationService = notificationService;
     }
 
     public List<TrainingRequest> getAllTrainingRequests() {
@@ -45,6 +48,15 @@ public class TrainingRequestService {
         if (trainingRequest != null) {
             if (trainingRequest.getReviewer().getId() == reviewerId) {
                 trainingRequest.setStatus(RequestStatus.APPROVED);
+                notificationService.createNotification(new Notification(
+                        "Training request approved",
+                        "Your training request has been approved.\n" +
+                                "Details:\n" +
+                                "- Training Request ID: " + trainingRequest.getId() + "\n" +
+                                "- Training ID: " + trainingRequest.getTraining().getId() + "\n" +
+                                "- Training Name: " + trainingRequest.getTraining().getName(),
+                        trainingRequest.getEmployee()
+                ));
                 return updateTrainingRequest(id, trainingRequest);
             } else {
                 throw new IllegalStateException("Employee is not the reviewer");
@@ -59,6 +71,15 @@ public class TrainingRequestService {
         if (trainingRequest != null) {
             if (trainingRequest.getReviewer().getId() == reviewerId) {
                 trainingRequest.setStatus(RequestStatus.REFUSED);
+                notificationService.createNotification(new Notification(
+                        "Training request refused",
+                        "Your training request has been refused.\n" +
+                                "Details:\n" +
+                                "- Training Request ID: " + trainingRequest.getId() + "\n" +
+                                "- Training ID: " + trainingRequest.getTraining().getId() + "\n" +
+                                "- Training Name: " + trainingRequest.getTraining().getName(),
+                        trainingRequest.getEmployee()
+                ));
                 return updateTrainingRequest(id, trainingRequest);
             } else {
                 throw new IllegalStateException("Employee is not the reviewer");
