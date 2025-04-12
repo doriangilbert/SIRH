@@ -37,4 +37,14 @@ public class LeaveRequestController {
     public LeaveRequest updateLeaveRequest(@PathVariable long id, @RequestBody LeaveRequest leaveRequest) {
         return leaveRequestService.updateLeaveRequest(id, leaveRequest);
     }
+
+    @PutMapping("/leaverequests/{id}/approve")
+    public LeaveRequest approveLeaveRequest(@PathVariable long id, @RequestParam(name = "reviewerId") long reviewerId) {
+        return leaveRequestService.approveLeaveRequest(id, reviewerId);
+    }
+
+    @PutMapping("/leaverequests/{id}/refuse")
+    public LeaveRequest refuseLeaveRequest(@PathVariable long id, @RequestParam(name = "reviewerId") long reviewerId) {
+        return leaveRequestService.refuseLeaveRequest(id, reviewerId);
+    }
 }
