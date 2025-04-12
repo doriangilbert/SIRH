@@ -5,7 +5,6 @@ import com.example.sirh_backend.models.LeaveRequest;
 import com.example.sirh_backend.models.Training;
 import com.example.sirh_backend.models.TrainingRequest;
 import com.example.sirh_backend.repositories.EmployeeRepository;
-import com.example.sirh_backend.repositories.TrainingRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,14 +15,15 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final LeaveRequestService leaveRequestService;
-    private final TrainingRepository trainingRepository;
+    private final TrainingService trainingService;
     private final TrainingRequestService trainingRequestService;
 
-    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService, TrainingRepository trainingRepository, TrainingRequestService trainingRequestService) {
+    public EmployeeService(EmployeeRepository employeeRepository, LeaveRequestService leaveRequestService, TrainingService trainingService, TrainingRequestService trainingRequestService) {
         this.employeeRepository = employeeRepository;
         this.leaveRequestService = leaveRequestService;
-        this.trainingRepository = trainingRepository;
+        this.trainingService = trainingService;
         this.trainingRequestService = trainingRequestService;
+
     }
 
     public List<Employee> getAllEmployees() {
@@ -79,7 +79,7 @@ public class EmployeeService {
     }
 
     public TrainingRequest makeTrainingRequest(long trainingId, long employeeId) {
-        Training training = trainingRepository.findById(trainingId).orElse(null);
+        Training training = trainingService.getTrainingById(trainingId);
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
         if (training != null) {
             if (employee != null) {
