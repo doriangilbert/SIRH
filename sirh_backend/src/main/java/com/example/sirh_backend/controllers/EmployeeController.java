@@ -3,9 +3,12 @@ package com.example.sirh_backend.controllers;
 import com.example.sirh_backend.dtos.EmployeeDTO;
 import com.example.sirh_backend.mappers.EmployeeMapper;
 import com.example.sirh_backend.models.Employee;
+import com.example.sirh_backend.models.LeaveRequest;
+import com.example.sirh_backend.models.TrainingRequest;
 import com.example.sirh_backend.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -36,5 +39,15 @@ public class EmployeeController {
     @PutMapping("/employees/{id}")
     public Employee updateEmployee(@PathVariable long id, @RequestBody Employee employee) {
         return employeeService.updateEmployee(id, employee);
+    }
+
+    @PostMapping("/employees/{id}/leaverequests")
+    public LeaveRequest makeLeaveRequest(@PathVariable long id, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
+        return employeeService.makeLeaveRequest(id, LocalDate.parse(startDate), LocalDate.parse(endDate));
+    }
+
+    @PostMapping("/employees/{id}/trainingrequests")
+    public TrainingRequest makeTrainingRequest(@PathVariable long id, @RequestParam("trainingId") long trainingId) {
+        return employeeService.makeTrainingRequest(trainingId, id);
     }
 }
