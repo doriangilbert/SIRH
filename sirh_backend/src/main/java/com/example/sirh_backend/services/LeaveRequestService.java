@@ -1,6 +1,7 @@
 package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.models.LeaveRequest;
+import com.example.sirh_backend.models.Notification;
 import com.example.sirh_backend.models.RequestStatus;
 import com.example.sirh_backend.repositories.LeaveRequestRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,11 @@ import java.util.List;
 public class LeaveRequestService {
 
     private final LeaveRequestRepository leaveRequestRepository;
+    private final NotificationService notificationService;
 
-    public LeaveRequestService(LeaveRequestRepository leaveRequestRepository) {
+    public LeaveRequestService(LeaveRequestRepository leaveRequestRepository, NotificationService notificationService) {
         this.leaveRequestRepository = leaveRequestRepository;
+        this.notificationService = notificationService;
     }
 
     public List<LeaveRequest> getAllLeaveRequests() {
@@ -46,6 +49,15 @@ public class LeaveRequestService {
         if (leaveRequest != null) {
             if (leaveRequest.getReviewer().getId() == reviewerId) {
                 leaveRequest.setStatus(RequestStatus.APPROVED);
+                notificationService.createNotification(new Notification(
+                        "Leave request approved",
+                        "Your leave request has been approved.\n" +
+                                "Details:\n" +
+                                "- Leave Request ID: " + leaveRequest.getId() + "\n" +
+                                "- Start Date: " + leaveRequest.getStartDate() + "\n" +
+                                "- End Date: " + leaveRequest.getEndDate(),
+                        leaveRequest.getEmployee()
+                ));
                 return updateLeaveRequest(id, leaveRequest);
             } else {
                 throw new IllegalArgumentException("Employee is not the reviewer");
@@ -64,6 +76,15 @@ public class LeaveRequestService {
                 leaveRequest.getEmployee().setLeaveBalance(
                         leaveRequest.getEmployee().getLeaveBalance() + (int) leaveDuration
                 );
+                notificationService.createNotification(new Notification(
+                        "Leave request refused",
+                        "Your leave request has been refused.\n" +
+                                "Details:\n" +
+                                "- Leave Request ID: " + leaveRequest.getId() + "\n" +
+                                "- Start Date: " + leaveRequest.getStartDate() + "\n" +
+                                "- End Date: " + leaveRequest.getEndDate(),
+                        leaveRequest.getEmployee()
+                ));
                 return updateLeaveRequest(id, leaveRequest);
             } else {
                 throw new IllegalArgumentException("Employee is not the reviewer");
