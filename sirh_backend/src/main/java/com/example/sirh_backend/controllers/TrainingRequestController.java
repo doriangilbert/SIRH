@@ -37,4 +37,14 @@ public class TrainingRequestController {
     public TrainingRequest updateTrainingRequest(@PathVariable long id, @RequestBody TrainingRequest trainingRequest) {
         return trainingRequestService.updateTrainingRequest(id, trainingRequest);
     }
+
+    @PutMapping("/trainingrequests/{id}/approve")
+    public TrainingRequest approveTrainingRequest(@PathVariable long id, @RequestParam("reviewerId") long reviewerId) {
+        return trainingRequestService.approveTrainingRequest(id, reviewerId);
+    }
+
+    @PutMapping("/trainingrequests/{id}/refuse")
+    public TrainingRequest refuseTrainingRequest(@PathVariable long id, @RequestParam("reviewerId") long reviewerId) {
+        return trainingRequestService.refuseTrainingRequest(id, reviewerId);
+    }
 }
