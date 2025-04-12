@@ -147,6 +147,9 @@ function App() {
                     <button onClick={() => fetchData('trainingrequests')}
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">TrainingRequests
                     </button>
+                    <button onClick={() => fetchData('notifications')}
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">Notifications
+                    </button>
                 </div>
                 <button onClick={handleInit} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2">Init</button>
             </header>
