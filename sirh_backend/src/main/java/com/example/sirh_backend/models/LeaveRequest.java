@@ -5,26 +5,11 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class LeaveRequest {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class LeaveRequest extends Request {
 
     private LocalDate startDate;
 
     private LocalDate endDate;
-
-    @Enumerated(EnumType.STRING)
-    private RequestStatus status;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
-
-    @ManyToOne
-    @JoinColumn(name = "reviewer_id")
-    private Employee reviewer;
 
     public LeaveRequest() {}
 
@@ -33,10 +18,6 @@ public class LeaveRequest {
         this.endDate = endDate;
         this.status = RequestStatus.PENDING;
         this.employee = employee;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public LocalDate getStartDate() {
@@ -53,30 +34,6 @@ public class LeaveRequest {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
-    }
-
-    public RequestStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(RequestStatus status) {
-        this.status = status;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Employee getReviewer() {
-        return reviewer;
-    }
-
-    public void setReviewer(Employee reviewer) {
-        this.reviewer = reviewer;
     }
 
     @Override
