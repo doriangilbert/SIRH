@@ -59,7 +59,7 @@ public class EmployeeService {
                 if (employee.getLeaveBalance() >= leaveDuration) {
                     employee.setLeaveBalance((int) (employee.getLeaveBalance() - leaveDuration));
                     updateEmployee(employeeId, employee);
-                    LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
+                    LeaveRequest leaveRequest = (LeaveRequest) RequestFactory.createRequest("LeaveRequest", startDate, endDate, employee);
                     if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                         leaveRequest.setReviewer(employee.getTeam().getManager());
                         notificationService.createNotification(new Notification(
@@ -91,7 +91,7 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
         if (training != null) {
             if (employee != null) {
-                TrainingRequest trainingRequest = new TrainingRequest(training, employee);
+                TrainingRequest trainingRequest = (TrainingRequest) RequestFactory.createRequest("TrainingRequest", training, employee);
                 if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                     trainingRequest.setReviewer(employee.getTeam().getManager());
                     notificationService.createNotification(new Notification(
