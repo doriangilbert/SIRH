@@ -62,15 +62,21 @@ public class EmployeeService {
                     LeaveRequest leaveRequest = (LeaveRequest) RequestFactory.createRequest("LeaveRequest", startDate, endDate, employee);
                     if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                         leaveRequest.setReviewer(employee.getTeam().getManager());
-                        notificationService.createNotification(new Notification(
-                                "New leave request",
-                                "You have a new leave request to review.\n" +
-                                        "Details:\n" +
-                                        "- Leave Request ID: " + leaveRequest.getId() + "\n" +
-                                        "- Employee ID: " + employee.getId() + "\n" +
-                                        "- Start Date: " + startDate + "\n" +
-                                        "- End Date: " + endDate,
-                                employee.getTeam().getManager()));
+                        PriorityNotificationDecorator priorityNotification = new PriorityNotificationDecorator(
+                                new Notification(
+                                        "New leave request",
+                                        "You have a new leave request to review.\n" +
+                                                "Details:\n" +
+                                                "- Leave Request ID: " + leaveRequest.getId() + "\n" +
+                                                "- Employee ID: " + employee.getId() + "\n" +
+                                                "- Start Date: " + startDate + "\n" +
+                                                "- End Date: " + endDate,
+                                        employee.getTeam().getManager()));
+                        Notification notification = new Notification(
+                                priorityNotification.getTitle(),
+                                priorityNotification.getDescription(),
+                                priorityNotification.getEmployee());
+                        notificationService.createNotification(notification);
                     } else {
                         throw new RuntimeException("No manager found for the employee's team");
                     }
@@ -94,15 +100,21 @@ public class EmployeeService {
                 TrainingRequest trainingRequest = (TrainingRequest) RequestFactory.createRequest("TrainingRequest", training, employee);
                 if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                     trainingRequest.setReviewer(employee.getTeam().getManager());
-                    notificationService.createNotification(new Notification(
-                            "New training request",
-                            "You have a new training request to review.\n" +
-                                    "Details:\n" +
-                                    "- Training Request ID: " + trainingRequest.getId() + "\n" +
-                                    "- Employee ID: " + employee.getId() + "\n" +
-                                    "- Training ID: " + training.getId() + "\n" +
-                                    "- Training Name: " + training.getName(),
-                            employee.getTeam().getManager()));
+                    PriorityNotificationDecorator priorityNotification = new PriorityNotificationDecorator(
+                            new Notification(
+                                    "New training request",
+                                    "You have a new training request to review.\n" +
+                                            "Details:\n" +
+                                            "- Training Request ID: " + trainingRequest.getId() + "\n" +
+                                            "- Employee ID: " + employee.getId() + "\n" +
+                                            "- Training ID: " + training.getId() + "\n" +
+                                            "- Training Name: " + training.getName(),
+                                    employee.getTeam().getManager()));
+                    Notification notification = new Notification(
+                            priorityNotification.getTitle(),
+                            priorityNotification.getDescription(),
+                            priorityNotification.getEmployee());
+                    notificationService.createNotification(notification);
                 } else {
                     throw new RuntimeException("No manager found for the employee's team");
                 }
