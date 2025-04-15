@@ -2,6 +2,8 @@ package com.example.sirh_backend.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+
 @Entity
 public class TrainingRequest extends Request {
 
@@ -15,6 +17,7 @@ public class TrainingRequest extends Request {
         this.status = RequestStatus.PENDING;
         this.training = training;
         this.employee = employee;
+        this.observers = new ArrayList<>();
     }
 
     public Training getTraining() {

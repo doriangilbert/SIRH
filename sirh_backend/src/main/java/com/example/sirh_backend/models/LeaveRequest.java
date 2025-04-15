@@ -3,6 +3,7 @@ package com.example.sirh_backend.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Entity
 public class LeaveRequest extends Request {
@@ -18,6 +19,7 @@ public class LeaveRequest extends Request {
         this.endDate = endDate;
         this.status = RequestStatus.PENDING;
         this.employee = employee;
+        this.observers = new ArrayList<>();
     }
 
     public LocalDate getStartDate() {
