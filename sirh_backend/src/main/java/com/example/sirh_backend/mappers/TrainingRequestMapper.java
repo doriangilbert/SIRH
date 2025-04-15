@@ -1,7 +1,7 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.TrainingRequestDTO;
-import com.example.sirh_backend.models.TrainingRequest;
+import com.example.sirh_backend.models.entities.TrainingRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

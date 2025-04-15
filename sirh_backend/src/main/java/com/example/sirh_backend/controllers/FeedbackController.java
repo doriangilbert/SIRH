@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.FeedbackDTO;
 import com.example.sirh_backend.mappers.FeedbackMapper;
-import com.example.sirh_backend.models.Feedback;
+import com.example.sirh_backend.models.entities.Feedback;
 import com.example.sirh_backend.services.FeedbackService;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.SkillDTO;
 import com.example.sirh_backend.mappers.SkillMapper;
-import com.example.sirh_backend.models.Skill;
+import com.example.sirh_backend.models.entities.Skill;
 import com.example.sirh_backend.services.SkillService;
 import org.springframework.web.bind.annotation.*;
 

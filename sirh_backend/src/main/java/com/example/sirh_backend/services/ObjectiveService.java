@@ -1,6 +1,6 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.Objective;
+import com.example.sirh_backend.models.entities.Objective;
 import com.example.sirh_backend.repositories.ObjectiveRepository;
 import org.springframework.stereotype.Service;
 

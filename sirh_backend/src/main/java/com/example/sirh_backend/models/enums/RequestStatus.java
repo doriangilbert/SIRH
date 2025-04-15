@@ -1,4 +1,4 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.enums;
 
 public enum RequestStatus {
     APPROVED, // Request has been approved

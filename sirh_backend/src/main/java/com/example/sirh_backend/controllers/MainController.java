@@ -1,6 +1,6 @@
 package com.example.sirh_backend.controllers;
 
-import com.example.sirh_backend.models.*;
+import com.example.sirh_backend.models.entities.*;
 import com.example.sirh_backend.repositories.*;
 import org.springframework.web.bind.annotation.*;
 

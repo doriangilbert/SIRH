@@ -1,9 +1,9 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.EmployeeDTO;
-import com.example.sirh_backend.models.Employee;
-import com.example.sirh_backend.models.Notification;
-import com.example.sirh_backend.models.Skill;
+import com.example.sirh_backend.models.entities.Employee;
+import com.example.sirh_backend.models.entities.Notification;
+import com.example.sirh_backend.models.entities.Skill;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

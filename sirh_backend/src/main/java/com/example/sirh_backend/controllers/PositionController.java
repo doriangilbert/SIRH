@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.PositionDTO;
 import com.example.sirh_backend.mappers.PositionMapper;
-import com.example.sirh_backend.models.Position;
+import com.example.sirh_backend.models.entities.Position;
 import com.example.sirh_backend.services.PositionService;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.LeaveRequestDTO;
 import com.example.sirh_backend.mappers.LeaveRequestMapper;
-import com.example.sirh_backend.models.LeaveRequest;
+import com.example.sirh_backend.models.entities.LeaveRequest;
 import com.example.sirh_backend.services.LeaveRequestService;
 import org.springframework.web.bind.annotation.*;
 

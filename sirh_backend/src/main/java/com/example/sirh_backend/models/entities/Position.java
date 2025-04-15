@@ -1,4 +1,4 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

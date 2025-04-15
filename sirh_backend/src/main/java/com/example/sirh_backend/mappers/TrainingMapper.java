@@ -1,8 +1,8 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.TrainingDTO;
-import com.example.sirh_backend.models.Skill;
-import com.example.sirh_backend.models.Training;
+import com.example.sirh_backend.models.entities.Skill;
+import com.example.sirh_backend.models.entities.Training;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

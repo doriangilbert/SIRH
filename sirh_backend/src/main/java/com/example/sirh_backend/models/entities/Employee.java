@@ -1,5 +1,6 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.entities;
 
+import com.example.sirh_backend.models.patterns.Observer;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

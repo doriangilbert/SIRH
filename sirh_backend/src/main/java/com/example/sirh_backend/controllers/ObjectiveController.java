@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.ObjectiveDTO;
 import com.example.sirh_backend.mappers.ObjectiveMapper;
-import com.example.sirh_backend.models.Objective;
+import com.example.sirh_backend.models.entities.Objective;
 import com.example.sirh_backend.services.ObjectiveService;
 import org.springframework.web.bind.annotation.*;
 

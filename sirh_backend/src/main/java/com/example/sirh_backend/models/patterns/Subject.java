@@ -1,4 +1,4 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.patterns;
 
 public interface Subject {
 

@@ -1,7 +1,7 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.LeaveRequestDTO;
-import com.example.sirh_backend.models.LeaveRequest;
+import com.example.sirh_backend.models.entities.LeaveRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

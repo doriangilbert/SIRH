@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.NotificationDTO;
 import com.example.sirh_backend.mappers.NotificationMapper;
-import com.example.sirh_backend.models.Notification;
+import com.example.sirh_backend.models.entities.Notification;
 import com.example.sirh_backend.services.NotificationService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,8 +1,8 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.TeamDTO;
-import com.example.sirh_backend.models.Employee;
-import com.example.sirh_backend.models.Team;
+import com.example.sirh_backend.models.entities.Employee;
+import com.example.sirh_backend.models.entities.Team;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

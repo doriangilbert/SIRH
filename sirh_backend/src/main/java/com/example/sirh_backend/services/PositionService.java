@@ -1,6 +1,6 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.Position;
+import com.example.sirh_backend.models.entities.Position;
 import com.example.sirh_backend.repositories.PositionRepository;
 import org.springframework.stereotype.Service;
 

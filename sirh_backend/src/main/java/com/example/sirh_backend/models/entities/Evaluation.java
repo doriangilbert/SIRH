@@ -1,5 +1,6 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.entities;
 
+import com.example.sirh_backend.models.enums.EvaluationStatus;
 import jakarta.persistence.*;
 
 import java.time.Year;

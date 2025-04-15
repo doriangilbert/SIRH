@@ -1,7 +1,7 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.NotificationDTO;
-import com.example.sirh_backend.models.Notification;
+import com.example.sirh_backend.models.entities.Notification;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

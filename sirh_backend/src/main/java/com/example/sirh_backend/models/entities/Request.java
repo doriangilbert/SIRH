@@ -1,8 +1,10 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.entities;
 
+import com.example.sirh_backend.models.enums.RequestStatus;
+import com.example.sirh_backend.models.patterns.Observer;
+import com.example.sirh_backend.models.patterns.Subject;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @MappedSuperclass

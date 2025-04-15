@@ -1,7 +1,7 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.FeedbackDTO;
-import com.example.sirh_backend.models.Feedback;
+import com.example.sirh_backend.models.entities.Feedback;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

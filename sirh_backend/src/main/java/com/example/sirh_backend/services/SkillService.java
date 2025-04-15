@@ -1,6 +1,6 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.Skill;
+import com.example.sirh_backend.models.entities.Skill;
 import com.example.sirh_backend.repositories.SkillRepository;
 import org.springframework.stereotype.Service;
 

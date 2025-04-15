@@ -1,7 +1,7 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.ObjectiveDTO;
-import com.example.sirh_backend.models.Objective;
+import com.example.sirh_backend.models.entities.Objective;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

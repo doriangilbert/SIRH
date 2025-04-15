@@ -2,9 +2,9 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.EmployeeDTO;
 import com.example.sirh_backend.mappers.EmployeeMapper;
-import com.example.sirh_backend.models.Employee;
-import com.example.sirh_backend.models.LeaveRequest;
-import com.example.sirh_backend.models.TrainingRequest;
+import com.example.sirh_backend.models.entities.Employee;
+import com.example.sirh_backend.models.entities.LeaveRequest;
+import com.example.sirh_backend.models.entities.TrainingRequest;
 import com.example.sirh_backend.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 

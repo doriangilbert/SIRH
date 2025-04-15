@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.EvaluationDTO;
 import com.example.sirh_backend.mappers.EvaluationMapper;
-import com.example.sirh_backend.models.Evaluation;
+import com.example.sirh_backend.models.entities.Evaluation;
 import com.example.sirh_backend.services.EvaluationService;
 import org.springframework.web.bind.annotation.*;
 

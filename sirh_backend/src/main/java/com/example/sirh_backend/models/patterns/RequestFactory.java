@@ -1,5 +1,6 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.patterns;
 
+import com.example.sirh_backend.models.entities.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

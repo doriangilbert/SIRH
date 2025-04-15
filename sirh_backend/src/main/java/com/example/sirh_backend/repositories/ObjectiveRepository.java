@@ -1,6 +1,6 @@
 package com.example.sirh_backend.repositories;
 
-import com.example.sirh_backend.models.Objective;
+import com.example.sirh_backend.models.entities.Objective;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

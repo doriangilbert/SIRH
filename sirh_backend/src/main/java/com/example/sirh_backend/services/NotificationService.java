@@ -1,6 +1,6 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.Notification;
+import com.example.sirh_backend.models.entities.Notification;
 import com.example.sirh_backend.repositories.NotificationRepository;
 import org.springframework.stereotype.Service;
 

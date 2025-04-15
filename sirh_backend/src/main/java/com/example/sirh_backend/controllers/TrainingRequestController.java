@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.TrainingRequestDTO;
 import com.example.sirh_backend.mappers.TrainingRequestMapper;
-import com.example.sirh_backend.models.TrainingRequest;
+import com.example.sirh_backend.models.entities.TrainingRequest;
 import com.example.sirh_backend.services.TrainingRequestService;
 import org.springframework.web.bind.annotation.*;
 

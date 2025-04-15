@@ -1,8 +1,7 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.LeaveRequest;
-import com.example.sirh_backend.models.Notification;
-import com.example.sirh_backend.models.RequestStatus;
+import com.example.sirh_backend.models.entities.LeaveRequest;
+import com.example.sirh_backend.models.enums.RequestStatus;
 import com.example.sirh_backend.repositories.LeaveRequestRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
-package com.example.sirh_backend.models;
+package com.example.sirh_backend.models.entities;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Feedback {
+public class Objective {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,19 +11,17 @@ public class Feedback {
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "reviewer_id")
-    private Employee reviewer;
+    private boolean achieved;
 
     @ManyToOne
     @JoinColumn(name = "evaluation_id")
     private Evaluation evaluation;
 
-    public Feedback() {}
+    public Objective() {}
 
-    public Feedback(String description, Employee reviewer, Evaluation evaluation) {
+    public Objective(String description, Evaluation evaluation) {
         this.description = description;
-        this.reviewer = reviewer;
+        this.achieved = false;
         this.evaluation = evaluation;
     }
 
@@ -39,12 +37,12 @@ public class Feedback {
         this.description = description;
     }
 
-    public Employee getReviewer() {
-        return reviewer;
+    public boolean isAchieved() {
+        return achieved;
     }
 
-    public void setReviewer(Employee reviewer) {
-        this.reviewer = reviewer;
+    public void setAchieved(boolean achieved) {
+        this.achieved = achieved;
     }
 
     public Evaluation getEvaluation() {
@@ -57,10 +55,10 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" +
+        return "Objective{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", reviewer=" + reviewer +
+                ", achieved=" + achieved +
                 ", evaluation=" + evaluation +
                 '}';
     }

@@ -2,7 +2,7 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.dtos.TeamDTO;
 import com.example.sirh_backend.mappers.TeamMapper;
-import com.example.sirh_backend.models.Team;
+import com.example.sirh_backend.models.entities.Team;
 import com.example.sirh_backend.services.TeamService;
 import org.springframework.web.bind.annotation.*;
 

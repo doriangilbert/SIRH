@@ -1,6 +1,8 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.*;
+import com.example.sirh_backend.models.entities.*;
+import com.example.sirh_backend.models.patterns.PriorityNotificationDecorator;
+import com.example.sirh_backend.models.patterns.RequestFactory;
 import com.example.sirh_backend.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 

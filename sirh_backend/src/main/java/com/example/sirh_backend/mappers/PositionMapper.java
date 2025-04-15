@@ -1,7 +1,7 @@
 package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.PositionDTO;
-import com.example.sirh_backend.models.Position;
+import com.example.sirh_backend.models.entities.Position;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

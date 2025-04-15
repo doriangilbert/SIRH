@@ -1,6 +1,6 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.Feedback;
+import com.example.sirh_backend.models.entities.Feedback;
 import com.example.sirh_backend.repositories.FeedbackRepository;
 import org.springframework.stereotype.Service;
 
