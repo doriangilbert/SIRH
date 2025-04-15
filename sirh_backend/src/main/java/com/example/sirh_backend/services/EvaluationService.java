@@ -1,6 +1,7 @@
 package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.models.entities.Evaluation;
+import com.example.sirh_backend.models.patterns.EvaluationReportPdfStrategy;
 import com.example.sirh_backend.models.utils.EvaluationReportGenerator;
 import com.example.sirh_backend.repositories.EvaluationRepository;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -54,6 +55,8 @@ public class EvaluationService {
         if (evaluation == null) {
             throw new IllegalArgumentException("Evaluation not found");
         }
-        return EvaluationReportGenerator.getInstance().generatePdfReport(evaluation);
+        EvaluationReportGenerator evaluationReportGenerator = EvaluationReportGenerator.getInstance();
+        evaluationReportGenerator.setStrategy(new EvaluationReportPdfStrategy());
+        return evaluationReportGenerator.generateReport(evaluation);
     }
 }
