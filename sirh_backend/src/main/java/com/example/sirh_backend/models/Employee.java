@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Employee {
+public class Employee implements Observer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -153,5 +153,11 @@ public class Employee {
         } else {
             this.notifications.remove(notification);
         }
+    }
+
+    @Override
+    public void update(String message) {
+        Notification notification = new Notification("Update", message, this);
+        this.notifications.add(notification);
     }
 }
