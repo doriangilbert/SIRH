@@ -4,6 +4,8 @@ import com.example.sirh_backend.dtos.NotificationDTO;
 import com.example.sirh_backend.mappers.NotificationMapper;
 import com.example.sirh_backend.models.entities.Notification;
 import com.example.sirh_backend.services.NotificationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,22 +21,22 @@ public class NotificationController {
     }
 
     @GetMapping("/notifications")
-    public List<NotificationDTO> getAllNotifications() {
-        return NotificationMapper.toDTO(notificationService.getAllNotifications());
+    public ResponseEntity<List<NotificationDTO>> getAllNotifications() {
+        return new ResponseEntity<>(NotificationMapper.toDTO(notificationService.getAllNotifications()), HttpStatus.OK);
     }
 
     @GetMapping("/notifications/{id}")
-    public NotificationDTO getNotificationById(@PathVariable long id) {
-        return NotificationMapper.toDTO(notificationService.getNotificationById(id));
+    public ResponseEntity<NotificationDTO> getNotificationById(@PathVariable long id) {
+        return new ResponseEntity<>(NotificationMapper.toDTO(notificationService.getNotificationById(id)), HttpStatus.OK);
     }
 
     @PostMapping("/notifications")
-    public Notification createNotification(@RequestBody Notification notification) {
-        return notificationService.createNotification(notification);
+    public ResponseEntity<NotificationDTO> createNotification(@RequestBody Notification notification) {
+        return new ResponseEntity<>(NotificationMapper.toDTO(notificationService.createNotification(notification)), HttpStatus.CREATED);
     }
 
     @PutMapping("/notifications/{id}")
-    public Notification updateNotification(@PathVariable long id, @RequestBody Notification notification) {
-        return notificationService.updateNotification(id, notification);
+    public ResponseEntity<NotificationDTO> updateNotification(@PathVariable long id, @RequestBody Notification notification) {
+        return new ResponseEntity<>(NotificationMapper.toDTO(notificationService.updateNotification(id, notification)), HttpStatus.OK);
     }
 }
