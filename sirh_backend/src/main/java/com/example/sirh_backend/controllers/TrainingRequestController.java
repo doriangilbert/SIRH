@@ -4,6 +4,8 @@ import com.example.sirh_backend.dtos.TrainingRequestDTO;
 import com.example.sirh_backend.mappers.TrainingRequestMapper;
 import com.example.sirh_backend.models.entities.TrainingRequest;
 import com.example.sirh_backend.services.TrainingRequestService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,32 +21,32 @@ public class TrainingRequestController {
     }
 
     @GetMapping("/trainingrequests")
-    public List<TrainingRequestDTO> getAllTrainingRequests() {
-        return TrainingRequestMapper.toDTO(trainingRequestService.getAllTrainingRequests());
+    public ResponseEntity<List<TrainingRequestDTO>> getAllTrainingRequests() {
+        return new ResponseEntity<>(TrainingRequestMapper.toDTO(trainingRequestService.getAllTrainingRequests()), HttpStatus.OK);
     }
 
     @GetMapping("/trainingrequests/{id}")
-    public TrainingRequestDTO getTrainingRequestsById(@PathVariable long id) {
-        return TrainingRequestMapper.toDTO(trainingRequestService.getTrainingRequestById(id));
+    public ResponseEntity<TrainingRequestDTO> getTrainingRequestsById(@PathVariable long id) {
+        return new ResponseEntity<>(TrainingRequestMapper.toDTO(trainingRequestService.getTrainingRequestById(id)), HttpStatus.OK);
     }
 
     @PostMapping("/trainingrequests")
-    public TrainingRequest createTrainingRequest(@RequestBody TrainingRequest trainingRequest) {
-        return trainingRequestService.createTrainingRequest(trainingRequest);
+    public ResponseEntity<TrainingRequestDTO> createTrainingRequest(@RequestBody TrainingRequest trainingRequest) {
+        return new ResponseEntity<>(TrainingRequestMapper.toDTO(trainingRequestService.createTrainingRequest(trainingRequest)), HttpStatus.CREATED);
     }
 
     @PutMapping("/trainingrequests/{id}")
-    public TrainingRequest updateTrainingRequest(@PathVariable long id, @RequestBody TrainingRequest trainingRequest) {
-        return trainingRequestService.updateTrainingRequest(id, trainingRequest);
+    public ResponseEntity<TrainingRequestDTO> updateTrainingRequest(@PathVariable long id, @RequestBody TrainingRequest trainingRequest) {
+        return new ResponseEntity<>(TrainingRequestMapper.toDTO(trainingRequestService.updateTrainingRequest(id, trainingRequest)), HttpStatus.OK);
     }
 
     @PutMapping("/trainingrequests/{id}/approve")
-    public TrainingRequest approveTrainingRequest(@PathVariable long id, @RequestParam("reviewerId") long reviewerId) {
-        return trainingRequestService.approveTrainingRequest(id, reviewerId);
+    public ResponseEntity<TrainingRequestDTO> approveTrainingRequest(@PathVariable long id, @RequestParam("reviewerId") long reviewerId) {
+        return new ResponseEntity<>(TrainingRequestMapper.toDTO(trainingRequestService.approveTrainingRequest(id, reviewerId)), HttpStatus.OK);
     }
 
     @PutMapping("/trainingrequests/{id}/refuse")
-    public TrainingRequest refuseTrainingRequest(@PathVariable long id, @RequestParam("reviewerId") long reviewerId) {
-        return trainingRequestService.refuseTrainingRequest(id, reviewerId);
+    public ResponseEntity<TrainingRequestDTO> refuseTrainingRequest(@PathVariable long id, @RequestParam("reviewerId") long reviewerId) {
+        return new ResponseEntity<>(TrainingRequestMapper.toDTO(trainingRequestService.refuseTrainingRequest(id, reviewerId)), HttpStatus.OK);
     }
 }
