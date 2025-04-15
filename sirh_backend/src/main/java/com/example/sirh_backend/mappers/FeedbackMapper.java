@@ -15,8 +15,8 @@ public class FeedbackMapper {
             return new FeedbackDTO(
                     feedback.getId(),
                     feedback.getDescription(),
-                    feedback.getReviewer().getId(),
-                    feedback.getEvaluation().getId()
+                    feedback.getReviewer() != null ? feedback.getReviewer().getId() : null,
+                    feedback.getEvaluation() != null ? feedback.getEvaluation().getId() : null
             );
         }
         return null;

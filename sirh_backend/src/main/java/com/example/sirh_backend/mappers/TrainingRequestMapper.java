@@ -14,10 +14,10 @@ public class TrainingRequestMapper {
         if (trainingRequest != null) {
             return new TrainingRequestDTO(
                     trainingRequest.getId(),
-                    trainingRequest.getStatus().toString(),
-                    trainingRequest.getTraining().getId(),
-                    trainingRequest.getEmployee().getId(),
-                    trainingRequest.getReviewer().getId()
+                    trainingRequest.getStatus() != null ? trainingRequest.getStatus().toString() : null,
+                    trainingRequest.getTraining() != null ? trainingRequest.getTraining().getId() : null,
+                    trainingRequest.getEmployee() != null ? trainingRequest.getEmployee().getId() : null,
+                    trainingRequest.getReviewer() != null ? trainingRequest.getReviewer().getId() : null
             );
         }
         return null;

@@ -16,8 +16,8 @@ public class TeamMapper {
             return new TeamDTO(
                     team.getId(),
                     team.getName(),
-                    team.getEmployees().stream().map(Employee::getId).collect(Collectors.toList()),
-                    team.getManager().getId()
+                    team.getEmployees() != null ? team.getEmployees().stream().map(Employee::getId).collect(Collectors.toList()) : null,
+                    team.getManager() != null ? team.getManager().getId() : null
             );
         }
         return null;

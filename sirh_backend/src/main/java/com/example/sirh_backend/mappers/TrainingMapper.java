@@ -17,7 +17,7 @@ public class TrainingMapper {
                     training.getId(),
                     training.getName(),
                     training.getDescription(),
-                    training.getSkills().stream().map(Skill::getId).collect(Collectors.toList())
+                    training.getSkills() != null ? training.getSkills().stream().map(Skill::getId).collect(Collectors.toList()) : List.of()
             );
         }
         return null;

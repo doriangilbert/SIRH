@@ -14,11 +14,11 @@ public class LeaveRequestMapper {
         if (leaveRequest != null) {
             return new LeaveRequestDTO(
                     leaveRequest.getId(),
-                    leaveRequest.getStartDate().toString(),
-                    leaveRequest.getEndDate().toString(),
-                    leaveRequest.getStatus().toString(),
-                    leaveRequest.getEmployee().getId(),
-                    leaveRequest.getReviewer().getId()
+                    leaveRequest.getStartDate() != null ? leaveRequest.getStartDate().toString() : null,
+                    leaveRequest.getEndDate() != null ? leaveRequest.getEndDate().toString() : null,
+                    leaveRequest.getStatus() != null ? leaveRequest.getStatus().toString() : null,
+                    leaveRequest.getEmployee() != null ? leaveRequest.getEmployee().getId() : null,
+                    leaveRequest.getReviewer() != null ? leaveRequest.getReviewer().getId() : null
             );
         }
         return null;

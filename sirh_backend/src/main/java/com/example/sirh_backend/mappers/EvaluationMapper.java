@@ -18,10 +18,10 @@ public class EvaluationMapper {
                     evaluation.getId(),
                     Integer.parseInt(evaluation.getYear().toString()),
                     evaluation.getDescription(),
-                    evaluation.getStatus().toString(),
-                    evaluation.getEmployee().getId(),
-                    evaluation.getFeedbacks().stream().map(Feedback::getId).collect(Collectors.toList()),
-                    evaluation.getObjectives().stream().map(Objective::getId).collect(Collectors.toList())
+                    evaluation.getStatus() != null ? evaluation.getStatus().toString() : null,
+                    evaluation.getEmployee() != null ? evaluation.getEmployee().getId() : null,
+                    evaluation.getFeedbacks() != null ? evaluation.getFeedbacks().stream().map(Feedback::getId).collect(Collectors.toList()) : List.of(),
+                    evaluation.getObjectives() != null ? evaluation.getObjectives().stream().map(Objective::getId).collect(Collectors.toList()) : List.of()
             );
         }
         return null;

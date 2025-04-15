@@ -16,7 +16,7 @@ public class NotificationMapper {
                     notification.getId(),
                     notification.getTitle(),
                     notification.getDescription(),
-                    notification.getEmployee().getId()
+                    notification.getEmployee() != null ? notification.getEmployee().getId() : null
             );
         }
         return null;

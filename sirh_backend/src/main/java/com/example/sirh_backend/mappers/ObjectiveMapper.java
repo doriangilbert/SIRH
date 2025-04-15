@@ -16,7 +16,7 @@ public class ObjectiveMapper {
                     objective.getId(),
                     objective.getDescription(),
                     objective.isAchieved(),
-                    objective.getEvaluation().getId()
+                    objective.getEvaluation() != null ? objective.getEvaluation().getId() : null
             );
         }
         return null;

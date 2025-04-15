@@ -19,10 +19,10 @@ public class EmployeeMapper {
                     employee.getFirstName(),
                     employee.getLastName(),
                     employee.getLeaveBalance(),
-                    employee.getPosition().getId(),
-                    employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()),
-                    employee.getTeam().getId(),
-                    employee.getNotifications().stream().map(Notification::getId).collect(Collectors.toList())
+                    employee.getPosition() != null ? employee.getPosition().getId() : null,
+                    employee.getSkills() != null ? employee.getSkills().stream().map(Skill::getId).collect(Collectors.toList()) : null,
+                    employee.getTeam() != null ? employee.getTeam().getId() : null,
+                    employee.getNotifications() != null ? employee.getNotifications().stream().map(Notification::getId).collect(Collectors.toList()) : null
             );
         }
         return null;
