@@ -4,6 +4,8 @@ import com.example.sirh_backend.dtos.LeaveRequestDTO;
 import com.example.sirh_backend.mappers.LeaveRequestMapper;
 import com.example.sirh_backend.models.entities.LeaveRequest;
 import com.example.sirh_backend.services.LeaveRequestService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,32 +21,32 @@ public class LeaveRequestController {
     }
 
     @GetMapping("/leaverequests")
-    public List<LeaveRequestDTO> getAllLeaveRequests() {
-        return LeaveRequestMapper.toDTO(leaveRequestService.getAllLeaveRequests());
+    public ResponseEntity<List<LeaveRequestDTO>> getAllLeaveRequests() {
+        return new ResponseEntity<>(LeaveRequestMapper.toDTO(leaveRequestService.getAllLeaveRequests()), HttpStatus.OK);
     }
 
     @GetMapping("/leaverequests/{id}")
-    public LeaveRequestDTO getLeaveRequestsById(@PathVariable long id) {
-        return LeaveRequestMapper.toDTO(leaveRequestService.getLeaveRequestById(id));
+    public ResponseEntity<LeaveRequestDTO> getLeaveRequestsById(@PathVariable long id) {
+        return new ResponseEntity<>(LeaveRequestMapper.toDTO(leaveRequestService.getLeaveRequestById(id)), HttpStatus.OK);
     }
 
     @PostMapping("/leaverequests")
-    public LeaveRequest createLeaveRequest(@RequestBody LeaveRequest leaveRequest) {
-        return leaveRequestService.createLeaveRequest(leaveRequest);
+    public ResponseEntity<LeaveRequestDTO> createLeaveRequest(@RequestBody LeaveRequest leaveRequest) {
+        return new ResponseEntity<>(LeaveRequestMapper.toDTO(leaveRequestService.createLeaveRequest(leaveRequest)), HttpStatus.CREATED);
     }
 
     @PutMapping("/leaverequests/{id}")
-    public LeaveRequest updateLeaveRequest(@PathVariable long id, @RequestBody LeaveRequest leaveRequest) {
-        return leaveRequestService.updateLeaveRequest(id, leaveRequest);
+    public ResponseEntity<LeaveRequestDTO> updateLeaveRequest(@PathVariable long id, @RequestBody LeaveRequest leaveRequest) {
+        return new ResponseEntity<>(LeaveRequestMapper.toDTO(leaveRequestService.updateLeaveRequest(id, leaveRequest)), HttpStatus.OK);
     }
 
     @PutMapping("/leaverequests/{id}/approve")
-    public LeaveRequest approveLeaveRequest(@PathVariable long id, @RequestParam(name = "reviewerId") long reviewerId) {
-        return leaveRequestService.approveLeaveRequest(id, reviewerId);
+    public ResponseEntity<LeaveRequestDTO> approveLeaveRequest(@PathVariable long id, @RequestParam(name = "reviewerId") long reviewerId) {
+        return new ResponseEntity<>(LeaveRequestMapper.toDTO(leaveRequestService.approveLeaveRequest(id, reviewerId)), HttpStatus.OK);
     }
 
     @PutMapping("/leaverequests/{id}/refuse")
-    public LeaveRequest refuseLeaveRequest(@PathVariable long id, @RequestParam(name = "reviewerId") long reviewerId) {
-        return leaveRequestService.refuseLeaveRequest(id, reviewerId);
+    public ResponseEntity<LeaveRequestDTO> refuseLeaveRequest(@PathVariable long id, @RequestParam(name = "reviewerId") long reviewerId) {
+        return new ResponseEntity<>(LeaveRequestMapper.toDTO(leaveRequestService.refuseLeaveRequest(id, reviewerId)), HttpStatus.OK);
     }
 }
