@@ -2,6 +2,8 @@ package com.example.sirh_backend.controllers;
 
 import com.example.sirh_backend.models.entities.*;
 import com.example.sirh_backend.repositories.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -46,12 +48,12 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String index(@RequestParam(value = "name", defaultValue = "User") String name) {
-        return String.format("Hello %s! Welcome to SIRH.", name);
+    public ResponseEntity<String> index(@RequestParam(value = "name", defaultValue = "User") String name) {
+        return new ResponseEntity<>(String.format("Hello %s! Welcome to SIRH.", name), HttpStatus.OK);
     }
 
     @PostMapping("/init")
-    public String init() {
+    public ResponseEntity<String> init() {
         if (employeeRepository.count() > 0 || evaluationRepository.count() > 0 || feedbackRepository.count() > 0 || leaveRequestRepository.count() > 0 || objectiveRepository.count() > 0 || positionRepository.count() > 0 || skillRepository.count() > 0 || teamRepository.count() > 0 || trainingRepository.count() > 0 || trainingRequestRepository.count() > 0) {
             throw new IllegalStateException("Tables are not empty. Please reset the database before initializing.");
         }
@@ -191,6 +193,6 @@ public class MainController {
             }
         }
 
-        return "SIRH Backend Initialized!";
+        return new ResponseEntity<>("SIRH Backend Initialized!", HttpStatus.OK);
     }
 }
