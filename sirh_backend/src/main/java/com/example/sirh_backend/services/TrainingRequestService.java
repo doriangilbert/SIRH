@@ -48,15 +48,13 @@ public class TrainingRequestService {
         if (trainingRequest != null) {
             if (trainingRequest.getReviewer().getId() == reviewerId) {
                 trainingRequest.setStatus(RequestStatus.APPROVED);
-                notificationService.createNotification(new Notification(
-                        "Training request approved",
-                        "Your training request has been approved.\n" +
-                                "Details:\n" +
-                                "- Training Request ID: " + trainingRequest.getId() + "\n" +
-                                "- Training ID: " + trainingRequest.getTraining().getId() + "\n" +
-                                "- Training Name: " + trainingRequest.getTraining().getName(),
-                        trainingRequest.getEmployee()
-                ));
+                trainingRequest.notifyObservers(
+                        "A training request has been approved.\n" +
+                        "Details:\n" +
+                        "- Training Request ID: " + trainingRequest.getId() + "\n" +
+                        "- Training ID: " + trainingRequest.getTraining().getId() + "\n" +
+                        "- Training Name: " + trainingRequest.getTraining().getName()
+                );
                 return updateTrainingRequest(id, trainingRequest);
             } else {
                 throw new IllegalStateException("Employee is not the reviewer");
@@ -71,15 +69,13 @@ public class TrainingRequestService {
         if (trainingRequest != null) {
             if (trainingRequest.getReviewer().getId() == reviewerId) {
                 trainingRequest.setStatus(RequestStatus.REFUSED);
-                notificationService.createNotification(new Notification(
-                        "Training request refused",
-                        "Your training request has been refused.\n" +
-                                "Details:\n" +
-                                "- Training Request ID: " + trainingRequest.getId() + "\n" +
-                                "- Training ID: " + trainingRequest.getTraining().getId() + "\n" +
-                                "- Training Name: " + trainingRequest.getTraining().getName(),
-                        trainingRequest.getEmployee()
-                ));
+                trainingRequest.notifyObservers(
+                        "A training request has been refused.\n" +
+                        "Details:\n" +
+                        "- Training Request ID: " + trainingRequest.getId() + "\n" +
+                        "- Training ID: " + trainingRequest.getTraining().getId() + "\n" +
+                        "- Training Name: " + trainingRequest.getTraining().getName()
+                );
                 return updateTrainingRequest(id, trainingRequest);
             } else {
                 throw new IllegalStateException("Employee is not the reviewer");
