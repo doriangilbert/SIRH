@@ -60,8 +60,10 @@ public class EmployeeService {
                     employee.setLeaveBalance((int) (employee.getLeaveBalance() - leaveDuration));
                     updateEmployee(employeeId, employee);
                     LeaveRequest leaveRequest = (LeaveRequest) RequestFactory.createRequest("LeaveRequest", startDate, endDate, employee);
+                    leaveRequest.addObserver(employee);
                     if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                         leaveRequest.setReviewer(employee.getTeam().getManager());
+                        leaveRequest.addObserver(employee.getTeam().getManager());
                         PriorityNotificationDecorator priorityNotification = new PriorityNotificationDecorator(
                                 new Notification(
                                         "New leave request",
@@ -98,8 +100,10 @@ public class EmployeeService {
         if (training != null) {
             if (employee != null) {
                 TrainingRequest trainingRequest = (TrainingRequest) RequestFactory.createRequest("TrainingRequest", training, employee);
+                trainingRequest.addObserver(employee);
                 if (employee.getTeam() != null && employee.getTeam().getManager() != null) {
                     trainingRequest.setReviewer(employee.getTeam().getManager());
+                    trainingRequest.addObserver(employee.getTeam().getManager());
                     PriorityNotificationDecorator priorityNotification = new PriorityNotificationDecorator(
                             new Notification(
                                     "New training request",
