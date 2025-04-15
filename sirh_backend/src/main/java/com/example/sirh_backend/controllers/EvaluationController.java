@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -38,5 +39,20 @@ public class EvaluationController {
     @PutMapping("/evaluations/{id}")
     public ResponseEntity<EvaluationDTO> updateEvaluation(@PathVariable long id, @RequestBody Evaluation evaluation) {
         return new ResponseEntity<>(EvaluationMapper.toDTO(evaluationService.updateEvaluation(id, evaluation)), HttpStatus.OK);
+    }
+
+    @GetMapping("/evaluations/{id}/report")
+    public ResponseEntity<byte[]> getEvaluationReport(@PathVariable long id) {
+        try {
+            byte[] pdfReport = evaluationService.generatePdfReport(id);
+            return ResponseEntity.ok()
+                    .header("Content-Disposition", "attachment; filename=\"evaluation_report_" + id + ".pdf\"")
+                    .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                    .body(pdfReport);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }
