@@ -49,15 +49,13 @@ public class LeaveRequestService {
         if (leaveRequest != null) {
             if (leaveRequest.getReviewer().getId() == reviewerId) {
                 leaveRequest.setStatus(RequestStatus.APPROVED);
-                notificationService.createNotification(new Notification(
-                        "Leave request approved",
-                        "Your leave request has been approved.\n" +
-                                "Details:\n" +
-                                "- Leave Request ID: " + leaveRequest.getId() + "\n" +
-                                "- Start Date: " + leaveRequest.getStartDate() + "\n" +
-                                "- End Date: " + leaveRequest.getEndDate(),
-                        leaveRequest.getEmployee()
-                ));
+                leaveRequest.notifyObservers(
+                        "A leave request has been approved.\n" +
+                        "Details:\n" +
+                        "- Leave Request ID: " + leaveRequest.getId() + "\n" +
+                        "- Start Date: " + leaveRequest.getStartDate() + "\n" +
+                        "- End Date: " + leaveRequest.getEndDate()
+                );
                 return updateLeaveRequest(id, leaveRequest);
             } else {
                 throw new IllegalArgumentException("Employee is not the reviewer");
@@ -76,15 +74,13 @@ public class LeaveRequestService {
                 leaveRequest.getEmployee().setLeaveBalance(
                         leaveRequest.getEmployee().getLeaveBalance() + (int) leaveDuration
                 );
-                notificationService.createNotification(new Notification(
-                        "Leave request refused",
-                        "Your leave request has been refused.\n" +
-                                "Details:\n" +
-                                "- Leave Request ID: " + leaveRequest.getId() + "\n" +
-                                "- Start Date: " + leaveRequest.getStartDate() + "\n" +
-                                "- End Date: " + leaveRequest.getEndDate(),
-                        leaveRequest.getEmployee()
-                ));
+                leaveRequest.notifyObservers(
+                        "A leave request has been refused.\n" +
+                        "Details:\n" +
+                        "- Leave Request ID: " + leaveRequest.getId() + "\n" +
+                        "- Start Date: " + leaveRequest.getStartDate() + "\n" +
+                        "- End Date: " + leaveRequest.getEndDate()
+                );
                 return updateLeaveRequest(id, leaveRequest);
             } else {
                 throw new IllegalArgumentException("Employee is not the reviewer");
