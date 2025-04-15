@@ -4,6 +4,8 @@ import com.example.sirh_backend.dtos.SkillDTO;
 import com.example.sirh_backend.mappers.SkillMapper;
 import com.example.sirh_backend.models.entities.Skill;
 import com.example.sirh_backend.services.SkillService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,22 +21,22 @@ public class SkillController {
     }
 
     @GetMapping("/skills")
-    public List<SkillDTO> getAllSkills() {
-        return SkillMapper.toDTO(skillService.getAllSkills());
+    public ResponseEntity<List<SkillDTO>> getAllSkills() {
+        return new ResponseEntity<>(SkillMapper.toDTO(skillService.getAllSkills()), HttpStatus.OK);
     }
 
     @GetMapping("/skills/{id}")
-    public SkillDTO getSkillById(@PathVariable long id) {
-        return SkillMapper.toDTO(skillService.getSkillById(id));
+    public ResponseEntity<SkillDTO> getSkillById(@PathVariable long id) {
+        return new ResponseEntity<>(SkillMapper.toDTO(skillService.getSkillById(id)), HttpStatus.OK);
     }
 
     @PostMapping("/skills")
-    public Skill createSkill(@RequestBody Skill skill) {
-        return skillService.createSkill(skill);
+    public ResponseEntity<SkillDTO> createSkill(@RequestBody Skill skill) {
+        return new ResponseEntity<>(SkillMapper.toDTO(skillService.createSkill(skill)), HttpStatus.CREATED);
     }
 
     @PutMapping("/skills/{id}")
-    public Skill updateSkill(@PathVariable long id, @RequestBody Skill skill) {
-        return skillService.updateSkill(id, skill);
+    public ResponseEntity<SkillDTO> updateSkill(@PathVariable long id, @RequestBody Skill skill) {
+        return new ResponseEntity<>(SkillMapper.toDTO(skillService.updateSkill(id, skill)), HttpStatus.OK);
     }
 }
