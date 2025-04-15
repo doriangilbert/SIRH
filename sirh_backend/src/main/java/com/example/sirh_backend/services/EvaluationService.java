@@ -1,9 +1,17 @@
 package com.example.sirh_backend.services;
 
 import com.example.sirh_backend.models.entities.Evaluation;
+import com.example.sirh_backend.models.utils.EvaluationReportGenerator;
 import com.example.sirh_backend.repositories.EvaluationRepository;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -39,5 +47,13 @@ public class EvaluationService {
             return evaluationRepository.save(evaluation);
         }
         return null;
+    }
+
+    public byte[] generatePdfReport(long evaluationId) throws IOException {
+        Evaluation evaluation = getEvaluationById(evaluationId);
+        if (evaluation == null) {
+            throw new IllegalArgumentException("Evaluation not found");
+        }
+        return EvaluationReportGenerator.getInstance().generatePdfReport(evaluation);
     }
 }
