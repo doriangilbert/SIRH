@@ -75,6 +75,9 @@ public class Employee implements Observer {
     }
 
     public void setLeaveBalance(int leaveBalance) {
+        if (leaveBalance < 0) {
+            throw new IllegalArgumentException("Leave balance cannot be negative");
+        }
         this.leaveBalance = leaveBalance;
     }
 
