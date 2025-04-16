@@ -1,7 +1,7 @@
 package com.example.sirh_backend.services;
 
-import com.example.sirh_backend.models.enums.RequestStatus;
 import com.example.sirh_backend.models.entities.TrainingRequest;
+import com.example.sirh_backend.models.enums.RequestStatus;
 import com.example.sirh_backend.repositories.TrainingRequestRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,6 @@
 package com.example.sirh_backend.models.patterns;
 
 import com.example.sirh_backend.models.entities.Evaluation;
-import com.example.sirh_backend.models.utils.EvaluationReportGenerator;
 
 public class EvaluationReportPdfStrategy implements EvaluationReportStrategy {
 

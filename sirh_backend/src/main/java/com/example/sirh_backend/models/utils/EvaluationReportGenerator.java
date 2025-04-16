@@ -1,10 +1,7 @@
 package com.example.sirh_backend.models.utils;
 
 import com.example.sirh_backend.models.entities.Evaluation;
-import com.example.sirh_backend.models.patterns.EvaluationReportPdfBuilder;
 import com.example.sirh_backend.models.patterns.EvaluationReportStrategy;
-
-import java.io.IOException;
 
 public class EvaluationReportGenerator {
 

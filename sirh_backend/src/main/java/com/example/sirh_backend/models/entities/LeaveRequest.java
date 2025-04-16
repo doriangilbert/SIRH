@@ -1,7 +1,7 @@
 package com.example.sirh_backend.models.entities;
 
 import com.example.sirh_backend.models.enums.RequestStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
