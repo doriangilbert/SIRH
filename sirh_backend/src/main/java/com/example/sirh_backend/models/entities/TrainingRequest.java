@@ -14,7 +14,9 @@ public class TrainingRequest extends Request {
     @JoinColumn(name = "training_id")
     private Training training;
 
-    public TrainingRequest() {}
+    public TrainingRequest() {
+        this.observers = new ArrayList<>();
+    }
 
     public TrainingRequest(Training training, Employee employee) {
         this.status = RequestStatus.PENDING;
