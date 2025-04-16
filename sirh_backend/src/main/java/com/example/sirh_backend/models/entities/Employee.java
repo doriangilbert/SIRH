@@ -38,7 +38,10 @@ public class Employee implements Observer {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<Notification> notifications;
 
-    public Employee() {}
+    public Employee() {
+        this.skills = new ArrayList<>();
+        this.notifications = new ArrayList<>();
+    }
 
     public Employee(String firstName, String lastName, Position position, Team team) {
         this.firstName = firstName;
