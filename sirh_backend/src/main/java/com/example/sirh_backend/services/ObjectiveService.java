@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Objective;
 import com.example.sirh_backend.repositories.ObjectiveRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class ObjectiveService {
     }
 
     public Objective getObjectiveById(long id) {
-        return objectiveRepository.findById(id).orElse(null);
+        return objectiveRepository.findById(id).orElseThrow(() -> new NotFoundException("Objective not found"));
     }
 
     public Objective createObjective(Objective objective) {
@@ -28,13 +29,13 @@ public class ObjectiveService {
     }
 
     public Objective updateObjective(long id, Objective updatedObjective) {
-        Objective objective = objectiveRepository.findById(id).orElse(null);
-        if (objective != null) {
-            objective.setDescription(updatedObjective.getDescription());
-            objective.setAchieved(updatedObjective.isAchieved());
-            objective.setEvaluation(updatedObjective.getEvaluation());
-            return objectiveRepository.save(objective);
+        Objective objective = objectiveRepository.findById(id).orElseThrow(() -> new NotFoundException("Objective not found"));
+        if (updatedObjective == null) {
+            throw new IllegalArgumentException("Updated objective data cannot be null");
         }
-        return null;
+        objective.setDescription(updatedObjective.getDescription());
+        objective.setAchieved(updatedObjective.isAchieved());
+        objective.setEvaluation(updatedObjective.getEvaluation());
+        return objectiveRepository.save(objective);
     }
 }
