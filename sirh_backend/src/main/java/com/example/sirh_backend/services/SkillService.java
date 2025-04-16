@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Skill;
 import com.example.sirh_backend.repositories.SkillRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class SkillService {
     }
 
     public Skill getSkillById(long id) {
-        return skillRepository.findById(id).orElse(null);
+        return skillRepository.findById(id).orElseThrow(() -> new NotFoundException("Skill not found"));
     }
 
     public Skill createSkill(Skill skill) {
@@ -28,11 +29,11 @@ public class SkillService {
     }
 
     public Skill updateSkill(long id, Skill updatedSkill) {
-        Skill skill = skillRepository.findById(id).orElse(null);
-        if (skill != null) {
-            skill.setName(updatedSkill.getName());
-            return skillRepository.save(skill);
+        Skill skill = skillRepository.findById(id).orElseThrow(() -> new NotFoundException("Skill not found"));
+        if (updatedSkill == null) {
+            throw new IllegalArgumentException("Updated skill data cannot be null");
         }
-        return null;
+        skill.setName(updatedSkill.getName());
+        return skillRepository.save(skill);
     }
 }
