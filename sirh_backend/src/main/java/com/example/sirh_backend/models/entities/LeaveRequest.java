@@ -16,6 +16,9 @@ public class LeaveRequest extends Request {
     public LeaveRequest() {}
 
     public LeaveRequest(LocalDate startDate, LocalDate endDate, Employee employee) {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date cannot be after end date.");
+        }
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = RequestStatus.PENDING;
@@ -28,6 +31,9 @@ public class LeaveRequest extends Request {
     }
 
     public void setStartDate(LocalDate startDate) {
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException("Start date cannot be after end date.");
+        }
         this.startDate = startDate;
     }
 
@@ -36,6 +42,9 @@ public class LeaveRequest extends Request {
     }
 
     public void setEndDate(LocalDate endDate) {
+        if (endDate.isBefore(startDate)) {
+            throw new IllegalArgumentException("End date cannot be before start date.");
+        }
         this.endDate = endDate;
     }
 
