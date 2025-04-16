@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Feedback;
 import com.example.sirh_backend.repositories.FeedbackRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class FeedbackService {
     }
 
     public Feedback getFeedbackById(long id) {
-        return feedbackRepository.findById(id).orElse(null);
+        return feedbackRepository.findById(id).orElseThrow(() -> new NotFoundException("Feedback not found"));
     }
 
     public Feedback createFeedback(Feedback feedback) {
@@ -28,13 +29,13 @@ public class FeedbackService {
     }
 
     public Feedback updateFeedback(long id, Feedback updatedFeedback) {
-        Feedback feedback = feedbackRepository.findById(id).orElse(null);
-        if (feedback != null) {
-            feedback.setDescription(updatedFeedback.getDescription());
-            feedback.setReviewer(updatedFeedback.getReviewer());
-            feedback.setEvaluation(updatedFeedback.getEvaluation());
-            return feedbackRepository.save(feedback);
+        Feedback feedback = feedbackRepository.findById(id).orElseThrow(() -> new NotFoundException("Feedback not found"));
+        if (updatedFeedback == null) {
+            throw new IllegalArgumentException("Updated feedback data cannot be null");
         }
-        return null;
+        feedback.setDescription(updatedFeedback.getDescription());
+        feedback.setReviewer(updatedFeedback.getReviewer());
+        feedback.setEvaluation(updatedFeedback.getEvaluation());
+        return feedbackRepository.save(feedback);
     }
 }
