@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @CrossOrigin
@@ -112,9 +113,9 @@ public class MainController {
         List<Skill> skills = List.of(skill1, skill2, skill3, skill4, skill5, skill6, skill7);
 
         for (Employee employee : employees) {
-            int numSkills = (int) (Math.random() * skills.size()) + 1;
+            int numSkills = new Random().nextInt(skills.size()) + 1;
             for (int i = 0; i < numSkills; i++) {
-                Skill skill = skills.get((int) (Math.random() * skills.size()));
+                Skill skill = skills.get(new Random().nextInt(skills.size()));
                 if (!employee.getSkills().contains(skill)) {
                     employee.addSkill(skill);
                 }
@@ -130,13 +131,13 @@ public class MainController {
         teamRepository.saveAll(List.of(team1, team2, team3, team4));
 
         for (Employee employee : employees) {
-            if (Math.random() > 0.5) {
+            if (new Random().nextInt(2) == 1) {
                 Evaluation evaluation = new Evaluation(Year.of(2025), "Annual Review", employee);
                 evaluationRepository.save(evaluation);
                 if (employee.getPosition().equals(position2)) {
                     Feedback feedback = new Feedback("Feedback for " + employee.getFirstName(), employee, evaluation);
                     feedbackRepository.save(feedback);
-                    int numObjectives = (int) (Math.random() * 3) + 1;
+                    int numObjectives = new Random().nextInt(3) + 1;
                     for (int i = 0; i < numObjectives; i++) {
                         Objective objective = new Objective("Objective for " + employee.getFirstName() + " " + (i + 1), evaluation);
                         objectiveRepository.save(objective);
@@ -146,9 +147,9 @@ public class MainController {
         }
 
         for (Employee employee : employees) {
-            if (Math.random() > 0.5) {
-                LocalDate startDate = LocalDate.of(2025, (int) (Math.random() * 12) + 1, (int) (Math.random() * 28) + 1);
-                LocalDate endDate = startDate.plusDays((int) (Math.random() * 10) + 1);
+            if (new Random().nextInt(2) == 1) {
+                LocalDate startDate = LocalDate.of(2025, new Random().nextInt(12) + 1, new Random().nextInt(28) + 1);
+                LocalDate endDate = startDate.plusDays(new Random().nextInt(10) + 1);
                 LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
                 Team team = employee.getTeam();
                 if (team != null && team.getManager() != null) {
@@ -170,9 +171,9 @@ public class MainController {
         List<Training> trainings = List.of(training1, training2, training3, training4, training5, training6, training7);
 
         for (Training training : trainings) {
-            int numSkills = (int) (Math.random() * skills.size()) + 1;
+            int numSkills = new Random().nextInt(skills.size()) + 1;
             for (int i = 0; i < numSkills; i++) {
-                Skill skill = skills.get((int) (Math.random() * skills.size()));
+                Skill skill = skills.get(new Random().nextInt(skills.size()));
                 if (!training.getSkills().contains(skill)) {
                     training.addSkill(skill);
                 }
@@ -181,7 +182,7 @@ public class MainController {
         }
 
         for (Training training : trainings) {
-            int numEmployees = (int) (Math.random() * employees.size()) + 1;
+            int numEmployees = new Random().nextInt(employees.size()) + 1;
             for (int i = 0; i < numEmployees; i++) {
                 Employee employee = employees.get((int) (Math.random() * employees.size()));
                 TrainingRequest trainingRequest = new TrainingRequest(training, employee);
