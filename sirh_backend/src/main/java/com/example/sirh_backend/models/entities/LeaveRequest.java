@@ -13,7 +13,9 @@ public class LeaveRequest extends Request {
 
     private LocalDate endDate;
 
-    public LeaveRequest() {}
+    public LeaveRequest() {
+        this.observers = new ArrayList<>();
+    }
 
     public LeaveRequest(LocalDate startDate, LocalDate endDate, Employee employee) {
         if (startDate.isAfter(endDate)) {
