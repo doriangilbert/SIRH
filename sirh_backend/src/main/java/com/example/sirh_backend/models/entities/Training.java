@@ -24,7 +24,9 @@ public class Training {
     )
     private List<Skill> skills;
 
-    public Training() {}
+    public Training() {
+        this.skills = new ArrayList<>();
+    }
 
     public Training(String name, String description) {
         this.name = name;
