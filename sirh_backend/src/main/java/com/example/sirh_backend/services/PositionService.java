@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Position;
 import com.example.sirh_backend.repositories.PositionRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class PositionService {
     }
 
     public Position getPositionById(long id) {
-        return positionRepository.findById(id).orElse(null);
+        return positionRepository.findById(id).orElseThrow(() -> new NotFoundException("Position not found"));
     }
 
     public Position createPosition(Position position) {
@@ -28,11 +29,11 @@ public class PositionService {
     }
 
     public Position updatePosition(long id, Position updatedPosition) {
-        Position position = positionRepository.findById(id).orElse(null);
-        if (position != null) {
-            position.setName(updatedPosition.getName());
-            return positionRepository.save(position);
+        Position position = positionRepository.findById(id).orElseThrow(() -> new NotFoundException("Position not found"));
+        if (updatedPosition == null) {
+            throw new IllegalArgumentException("Updated position data cannot be null");
         }
-        return null;
+        position.setName(updatedPosition.getName());
+        return positionRepository.save(position);
     }
 }
