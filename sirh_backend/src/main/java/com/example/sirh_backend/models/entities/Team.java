@@ -21,7 +21,9 @@ public class Team {
     @JoinColumn(name = "manager_id")
     private Employee manager;
 
-    public Team() {}
+    public Team() {
+        this.employees = new ArrayList<>();
+    }
 
     public Team(String name, Employee manager) {
         this.name = name;
