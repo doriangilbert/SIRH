@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Evaluation;
 import com.example.sirh_backend.models.patterns.EvaluationReportPdfStrategy;
 import com.example.sirh_backend.models.utils.EvaluationReportGenerator;
@@ -22,7 +23,7 @@ public class EvaluationService {
     }
 
     public Evaluation getEvaluationById(long id) {
-        return evaluationRepository.findById(id).orElse(null);
+        return evaluationRepository.findById(id).orElseThrow(() -> new NotFoundException("Evaluation not found"));
     }
 
     public Evaluation createEvaluation(Evaluation evaluation) {
@@ -30,24 +31,21 @@ public class EvaluationService {
     }
 
     public Evaluation updateEvaluation(long id, Evaluation updatedEvaluation) {
-        Evaluation evaluation = evaluationRepository.findById(id).orElse(null);
-        if (evaluation != null) {
-            evaluation.setYear(updatedEvaluation.getYear());
-            evaluation.setDescription(updatedEvaluation.getDescription());
-            evaluation.setStatus(updatedEvaluation.getStatus());
-            evaluation.setEmployee(updatedEvaluation.getEmployee());
-            evaluation.setFeedbacks(updatedEvaluation.getFeedbacks());
-            evaluation.setObjectives(updatedEvaluation.getObjectives());
-            return evaluationRepository.save(evaluation);
+        Evaluation evaluation = evaluationRepository.findById(id).orElseThrow(() -> new NotFoundException("Evaluation not found"));
+        if (updatedEvaluation == null) {
+            throw new IllegalArgumentException("Updated evaluation data cannot be null");
         }
-        return null;
+        evaluation.setYear(updatedEvaluation.getYear());
+        evaluation.setDescription(updatedEvaluation.getDescription());
+        evaluation.setStatus(updatedEvaluation.getStatus());
+        evaluation.setEmployee(updatedEvaluation.getEmployee());
+        evaluation.setFeedbacks(updatedEvaluation.getFeedbacks());
+        evaluation.setObjectives(updatedEvaluation.getObjectives());
+        return evaluationRepository.save(evaluation);
     }
 
     public byte[] generatePdfReport(long evaluationId) {
         Evaluation evaluation = getEvaluationById(evaluationId);
-        if (evaluation == null) {
-            throw new IllegalArgumentException("Evaluation not found");
-        }
         EvaluationReportGenerator evaluationReportGenerator = EvaluationReportGenerator.getInstance();
         evaluationReportGenerator.setStrategy(new EvaluationReportPdfStrategy());
         return evaluationReportGenerator.generateReport(evaluation);
