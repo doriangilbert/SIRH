@@ -2,13 +2,14 @@ package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.ObjectiveDTO;
 import com.example.sirh_backend.models.entities.Objective;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
 public class ObjectiveMapper {
+
+    private ObjectiveMapper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static ObjectiveDTO toDTO(Objective objective) {
         if (objective != null) {
@@ -25,6 +26,6 @@ public class ObjectiveMapper {
     public static List<ObjectiveDTO> toDTO(List<Objective> objectives) {
         return objectives.stream()
                 .map(ObjectiveMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

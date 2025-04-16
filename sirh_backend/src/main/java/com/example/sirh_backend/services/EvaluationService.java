@@ -6,7 +6,6 @@ import com.example.sirh_backend.models.utils.EvaluationReportGenerator;
 import com.example.sirh_backend.repositories.EvaluationRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -44,7 +43,7 @@ public class EvaluationService {
         return null;
     }
 
-    public byte[] generatePdfReport(long evaluationId) throws IOException {
+    public byte[] generatePdfReport(long evaluationId) {
         Evaluation evaluation = getEvaluationById(evaluationId);
         if (evaluation == null) {
             throw new IllegalArgumentException("Evaluation not found");

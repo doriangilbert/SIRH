@@ -71,15 +71,15 @@ public abstract class Request implements Subject {
 
     @Override
     public void addObserver(Observer observer) {
-        if (observer instanceof Employee && !observers.contains(observer)) {
-            observers.add((Employee) observer);
+        if (observer instanceof Employee emp && !observers.contains(employee)) {
+            observers.add(emp);
         }
     }
 
     @Override
     public void removeObserver(Observer observer) {
-        if (observer instanceof Employee) {
-            observers.remove(observer);
+        if (observer instanceof Employee emp) {
+            observers.remove(emp);
         }
     }
 

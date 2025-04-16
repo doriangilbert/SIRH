@@ -57,7 +57,7 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(employeeId).orElse(null);
         if (employee != null) {
             if (!endDate.isBefore(startDate)) {
-                long leaveDuration = startDate.until(endDate).getDays() + 1;
+                long leaveDuration = (long) startDate.until(endDate).getDays() + 1;
                 if (employee.getLeaveBalance() >= leaveDuration) {
                     employee.setLeaveBalance((int) (employee.getLeaveBalance() - leaveDuration));
                     updateEmployee(employeeId, employee);
@@ -82,11 +82,11 @@ public class EmployeeService {
                                 priorityNotification.getEmployee());
                         notificationService.createNotification(notification);
                     } else {
-                        throw new RuntimeException("No manager found for the employee's team");
+                        throw new IllegalStateException("No manager found for the employee's team");
                     }
                     return leaveRequestService.createLeaveRequest(leaveRequest);
                 } else {
-                    throw new RuntimeException("Insufficient leave balance");
+                    throw new IllegalStateException("Insufficient leave balance");
                 }
             } else {
                 throw new IllegalArgumentException("End date must be after start date");
@@ -122,7 +122,7 @@ public class EmployeeService {
                             priorityNotification.getEmployee());
                     notificationService.createNotification(notification);
                 } else {
-                    throw new RuntimeException("No manager found for the employee's team");
+                    throw new IllegalStateException("No manager found for the employee's team");
                 }
                 return trainingRequestService.createTrainingRequest(trainingRequest);
             } else {

@@ -23,7 +23,7 @@ public class EvaluationReportPdfBuilder implements EvaluationReportBuilder {
             document.addPage(page);
             contentStream = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.OVERWRITE, true, true);
         } catch (IOException e) {
-            throw new RuntimeException("Error initializing PDF document", e);
+            throw new IllegalStateException("Error initializing PDF document", e);
         }
     }
 
@@ -51,7 +51,7 @@ public class EvaluationReportPdfBuilder implements EvaluationReportBuilder {
             contentStream.showText("Status: " + evaluation.getStatus());
             contentStream.newLine();
         } catch (IOException e) {
-            throw new RuntimeException("Error adding basic information to PDF", e);
+            throw new IllegalStateException("Error adding basic information to PDF", e);
         }
     }
 
@@ -66,11 +66,11 @@ public class EvaluationReportPdfBuilder implements EvaluationReportBuilder {
                     contentStream.showText("- " + objective.getDescription() + " (" + (objective.isAchieved() ? "achieved" : "not achieved") + ")");
                     contentStream.newLine();
                 } catch (IOException e) {
-                    System.err.println("Error while writing objective text to the PDF content stream: " + e.getMessage());
+                    throw new IllegalStateException("Error while writing objective text to the PDF content stream", e);
                 }
             });
         } catch (IOException e) {
-            throw new RuntimeException("Error adding objectives to PDF", e);
+            throw new IllegalStateException("Error adding objectives to PDF", e);
         }
     }
 
@@ -85,11 +85,11 @@ public class EvaluationReportPdfBuilder implements EvaluationReportBuilder {
                     contentStream.showText("- " + feedback.getDescription() + " (reviewer: " + feedback.getReviewer().getFirstName() + " " + feedback.getReviewer().getLastName() + " (id: " + feedback.getReviewer().getId() + ", position: " + feedback.getReviewer().getPosition().getName() + "))");
                     contentStream.newLine();
                 } catch (IOException e) {
-                    System.err.println("Error while writing feedback text to the PDF content stream: " + e.getMessage());
+                    throw new IllegalStateException("Error while writing feedback text to the PDF content stream", e);
                 }
             });
         } catch (IOException e) {
-            throw new RuntimeException("Error adding feedbacks to PDF", e);
+            throw new IllegalStateException("Error adding feedbacks to PDF", e);
         }
     }
 
@@ -102,7 +102,7 @@ public class EvaluationReportPdfBuilder implements EvaluationReportBuilder {
             document.close();
             return outputStream.toByteArray();
         } catch (IOException e) {
-            throw new RuntimeException("Error building PDF", e);
+            throw new IllegalStateException("Error building PDF", e);
         }
     }
 }

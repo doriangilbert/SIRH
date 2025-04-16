@@ -4,13 +4,14 @@ import com.example.sirh_backend.dtos.EvaluationDTO;
 import com.example.sirh_backend.models.entities.Evaluation;
 import com.example.sirh_backend.models.entities.Feedback;
 import com.example.sirh_backend.models.entities.Objective;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
 public class EvaluationMapper {
+
+    private EvaluationMapper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static EvaluationDTO toDTO(Evaluation evaluation) {
         if (evaluation != null) {
@@ -20,8 +21,8 @@ public class EvaluationMapper {
                     evaluation.getDescription(),
                     evaluation.getStatus() != null ? evaluation.getStatus().toString() : null,
                     evaluation.getEmployee() != null ? evaluation.getEmployee().getId() : null,
-                    evaluation.getFeedbacks() != null ? evaluation.getFeedbacks().stream().map(Feedback::getId).collect(Collectors.toList()) : List.of(),
-                    evaluation.getObjectives() != null ? evaluation.getObjectives().stream().map(Objective::getId).collect(Collectors.toList()) : List.of()
+                    evaluation.getFeedbacks() != null ? evaluation.getFeedbacks().stream().map(Feedback::getId).toList() : List.of(),
+                    evaluation.getObjectives() != null ? evaluation.getObjectives().stream().map(Objective::getId).toList() : List.of()
             );
         }
         return null;
@@ -30,6 +31,6 @@ public class EvaluationMapper {
     public static List<EvaluationDTO> toDTO(List<Evaluation> evaluations) {
         return evaluations.stream()
                 .map(EvaluationMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

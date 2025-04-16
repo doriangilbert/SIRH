@@ -6,7 +6,7 @@ public abstract class NotificationDecorator extends Notification {
 
     private final Notification notification;
 
-    public NotificationDecorator(Notification notification) {
+    protected NotificationDecorator(Notification notification) {
         super(notification.getTitle(), notification.getDescription(), notification.getEmployee());
         this.notification = notification;
     }

@@ -2,13 +2,14 @@ package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.SkillDTO;
 import com.example.sirh_backend.models.entities.Skill;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
 public class SkillMapper {
+
+    private SkillMapper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static SkillDTO toDTO(Skill skill) {
         if (skill != null) {
@@ -23,6 +24,6 @@ public class SkillMapper {
     public static List<SkillDTO> toDTO(List<Skill> skills) {
         return skills.stream()
                 .map(SkillMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

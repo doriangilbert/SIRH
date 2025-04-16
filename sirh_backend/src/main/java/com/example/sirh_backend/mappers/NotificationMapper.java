@@ -2,13 +2,14 @@ package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.NotificationDTO;
 import com.example.sirh_backend.models.entities.Notification;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
 public class NotificationMapper {
+
+    private NotificationMapper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static NotificationDTO toDTO(Notification notification) {
         if (notification != null) {
@@ -25,6 +26,6 @@ public class NotificationMapper {
     public static List<NotificationDTO> toDTO(List<Notification> notifications) {
         return notifications.stream()
                 .map(NotificationMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

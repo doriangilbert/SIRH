@@ -2,13 +2,14 @@ package com.example.sirh_backend.mappers;
 
 import com.example.sirh_backend.dtos.LeaveRequestDTO;
 import com.example.sirh_backend.models.entities.LeaveRequest;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
 public class LeaveRequestMapper {
+
+    private LeaveRequestMapper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static LeaveRequestDTO toDTO(LeaveRequest leaveRequest) {
         if (leaveRequest != null) {
@@ -27,6 +28,6 @@ public class LeaveRequestMapper {
     public static List<LeaveRequestDTO> toDTO(List<LeaveRequest> leaveRequests) {
         return leaveRequests.stream()
                 .map(LeaveRequestMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

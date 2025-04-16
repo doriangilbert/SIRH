@@ -11,11 +11,9 @@ import java.util.List;
 public class TrainingRequestService {
 
     private final TrainingRequestRepository trainingRequestRepository;
-    private final NotificationService notificationService;
 
-    public TrainingRequestService(TrainingRequestRepository trainingRequestRepository, NotificationService notificationService) {
+    public TrainingRequestService(TrainingRequestRepository trainingRequestRepository) {
         this.trainingRequestRepository = trainingRequestRepository;
-        this.notificationService = notificationService;
     }
 
     public List<TrainingRequest> getAllTrainingRequests() {

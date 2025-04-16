@@ -26,6 +26,8 @@ public class MainController {
     private final TrainingRepository trainingRepository;
     private final TrainingRequestRepository trainingRequestRepository;
 
+    private final Random random = new Random();
+
     public MainController(EmployeeRepository employeeRepository,
                           EvaluationRepository evaluationRepository,
                           FeedbackRepository feedbackRepository,
@@ -113,9 +115,9 @@ public class MainController {
         List<Skill> skills = List.of(skill1, skill2, skill3, skill4, skill5, skill6, skill7);
 
         for (Employee employee : employees) {
-            int numSkills = new Random().nextInt(skills.size()) + 1;
+            int numSkills = random.nextInt(skills.size()) + 1;
             for (int i = 0; i < numSkills; i++) {
-                Skill skill = skills.get(new Random().nextInt(skills.size()));
+                Skill skill = skills.get(random.nextInt(skills.size()));
                 if (!employee.getSkills().contains(skill)) {
                     employee.addSkill(skill);
                 }
@@ -131,13 +133,13 @@ public class MainController {
         teamRepository.saveAll(List.of(team1, team2, team3, team4));
 
         for (Employee employee : employees) {
-            if (new Random().nextInt(2) == 1) {
+            if (random.nextInt(2) == 1) {
                 Evaluation evaluation = new Evaluation(Year.of(2025), "Annual Review", employee);
                 evaluationRepository.save(evaluation);
                 if (employee.getPosition().equals(position2)) {
                     Feedback feedback = new Feedback("Feedback for " + employee.getFirstName(), employee, evaluation);
                     feedbackRepository.save(feedback);
-                    int numObjectives = new Random().nextInt(3) + 1;
+                    int numObjectives = random.nextInt(3) + 1;
                     for (int i = 0; i < numObjectives; i++) {
                         Objective objective = new Objective("Objective for " + employee.getFirstName() + " " + (i + 1), evaluation);
                         objectiveRepository.save(objective);
@@ -147,9 +149,9 @@ public class MainController {
         }
 
         for (Employee employee : employees) {
-            if (new Random().nextInt(2) == 1) {
-                LocalDate startDate = LocalDate.of(2025, new Random().nextInt(12) + 1, new Random().nextInt(28) + 1);
-                LocalDate endDate = startDate.plusDays(new Random().nextInt(10) + 1);
+            if (random.nextInt(2) == 1) {
+                LocalDate startDate = LocalDate.of(2025, random.nextInt(12) + 1, random.nextInt(28) + 1);
+                LocalDate endDate = startDate.plusDays((long) random.nextInt(10) + 1);
                 LeaveRequest leaveRequest = new LeaveRequest(startDate, endDate, employee);
                 Team team = employee.getTeam();
                 if (team != null && team.getManager() != null) {
@@ -171,9 +173,9 @@ public class MainController {
         List<Training> trainings = List.of(training1, training2, training3, training4, training5, training6, training7);
 
         for (Training training : trainings) {
-            int numSkills = new Random().nextInt(skills.size()) + 1;
+            int numSkills = random.nextInt(skills.size()) + 1;
             for (int i = 0; i < numSkills; i++) {
-                Skill skill = skills.get(new Random().nextInt(skills.size()));
+                Skill skill = skills.get(random.nextInt(skills.size()));
                 if (!training.getSkills().contains(skill)) {
                     training.addSkill(skill);
                 }
@@ -182,9 +184,9 @@ public class MainController {
         }
 
         for (Training training : trainings) {
-            int numEmployees = new Random().nextInt(employees.size()) + 1;
+            int numEmployees = random.nextInt(employees.size()) + 1;
             for (int i = 0; i < numEmployees; i++) {
-                Employee employee = employees.get((int) (Math.random() * employees.size()));
+                Employee employee = employees.get(random.nextInt(employees.size()));
                 TrainingRequest trainingRequest = new TrainingRequest(training, employee);
                 Team team = employee.getTeam();
                 if (team != null && team.getManager() != null) {

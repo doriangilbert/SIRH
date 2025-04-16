@@ -11,11 +11,9 @@ import java.util.List;
 public class LeaveRequestService {
 
     private final LeaveRequestRepository leaveRequestRepository;
-    private final NotificationService notificationService;
 
-    public LeaveRequestService(LeaveRequestRepository leaveRequestRepository, NotificationService notificationService) {
+    public LeaveRequestService(LeaveRequestRepository leaveRequestRepository) {
         this.leaveRequestRepository = leaveRequestRepository;
-        this.notificationService = notificationService;
     }
 
     public List<LeaveRequest> getAllLeaveRequests() {
@@ -69,7 +67,7 @@ public class LeaveRequestService {
         if (leaveRequest != null) {
             if (leaveRequest.getReviewer().getId() == reviewerId) {
                 leaveRequest.setStatus(RequestStatus.REFUSED);
-                long leaveDuration = leaveRequest.getStartDate().until(leaveRequest.getEndDate()).getDays() + 1;
+                long leaveDuration = (long) leaveRequest.getStartDate().until(leaveRequest.getEndDate()).getDays() + 1;
                 leaveRequest.getEmployee().setLeaveBalance(
                         leaveRequest.getEmployee().getLeaveBalance() + (int) leaveDuration
                 );
