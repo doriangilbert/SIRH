@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Notification;
 import com.example.sirh_backend.repositories.NotificationRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class NotificationService {
     }
 
     public Notification getNotificationById(long id) {
-        return notificationRepository.findById(id).orElse(null);
+        return notificationRepository.findById(id).orElseThrow(() -> new NotFoundException("Notification not found"));
     }
 
     public Notification createNotification(Notification notification) {
@@ -28,13 +29,13 @@ public class NotificationService {
     }
 
     public Notification updateNotification(long id, Notification updatedNotification) {
-        Notification notification = notificationRepository.findById(id).orElse(null);
-        if (notification != null) {
-            notification.setTitle(updatedNotification.getTitle());
-            notification.setDescription(updatedNotification.getDescription());
-            notification.setEmployee(updatedNotification.getEmployee());
-            return notificationRepository.save(notification);
+        Notification notification = notificationRepository.findById(id).orElseThrow(() -> new NotFoundException("Notification not found"));
+        if (updatedNotification == null) {
+            throw new IllegalArgumentException("Updated notification data cannot be null");
         }
-        return null;
+        notification.setTitle(updatedNotification.getTitle());
+        notification.setDescription(updatedNotification.getDescription());
+        notification.setEmployee(updatedNotification.getEmployee());
+        return notificationRepository.save(notification);
     }
 }
