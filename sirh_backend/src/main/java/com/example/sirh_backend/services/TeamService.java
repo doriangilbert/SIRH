@@ -1,5 +1,6 @@
 package com.example.sirh_backend.services;
 
+import com.example.sirh_backend.exceptions.NotFoundException;
 import com.example.sirh_backend.models.entities.Team;
 import com.example.sirh_backend.repositories.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class TeamService {
     }
 
     public Team getTeamById(long id) {
-        return teamRepository.findById(id).orElse(null);
+        return teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Team not found"));
     }
 
     public Team createTeam(Team team) {
@@ -28,13 +29,13 @@ public class TeamService {
     }
 
     public Team updateTeam(long id, Team updatedTeam) {
-        Team team = teamRepository.findById(id).orElse(null);
-        if (team != null) {
-            team.setName(updatedTeam.getName());
-            team.setEmployees(updatedTeam.getEmployees());
-            team.setManager(updatedTeam.getManager());
-            return teamRepository.save(team);
+        Team team = teamRepository.findById(id).orElseThrow(() -> new NotFoundException("Team not found"));
+        if (updatedTeam == null) {
+            throw new IllegalArgumentException("Updated team data cannot be null");
         }
-        return null;
+        team.setName(updatedTeam.getName());
+        team.setEmployees(updatedTeam.getEmployees());
+        team.setManager(updatedTeam.getManager());
+        return teamRepository.save(team);
     }
 }
