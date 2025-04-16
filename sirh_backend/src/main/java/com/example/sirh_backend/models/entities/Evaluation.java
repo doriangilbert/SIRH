@@ -31,7 +31,10 @@ public class Evaluation {
     @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL)
     private List<Objective> objectives;
 
-    public Evaluation() {}
+    public Evaluation() {
+        this.feedbacks = new ArrayList<>();
+        this.objectives = new ArrayList<>();
+    }
 
     public Evaluation(Year year, String description, Employee employee) {
         this.year = year;
