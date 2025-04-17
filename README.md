@@ -1,2 +1,2 @@
 # SIRH
-Projet de programmation d'une application de gestion des ressources humaines. Projet réalisé dans le cadre du cours "IFT785 – Approches orientées objets" du programme de Maîtrise en informatique de l'Université de Sherbrooke.
+Programming project for a human resources management application. Project carried out as part of the "IFT785 - Object-Oriented Approaches" course in the Master's programme in computer science at the Université de Sherbrooke.
