@@ -31,9 +31,8 @@ const DataPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
                         onChange={(e) => fetchData(e.target.value)}
                         className="border border-gray-300 rounded px-2 py-1"
                     >
-                        <option value="">-- Select --</option>
                         {['employees', 'evaluations', 'feedbacks', 'leaverequests', 'objectives', 'positions', 'skills', 'teams', 'trainings', 'trainingrequests', 'notifications'].map((item) => (
-                            <option key={item} value={item}>
+                            <option key={item} value={item} selected={item === 'employees'}>
                                 {item.charAt(0).toUpperCase() + item.slice(1)}
                             </option>
                         ))}
