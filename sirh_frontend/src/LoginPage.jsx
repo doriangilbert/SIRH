@@ -3,7 +3,7 @@ import axios from 'axios'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
-const LoginPage = ({ setEmployeeId }) => {
+const LoginPage = ({ setEmployeeId, setCurrentPage }) => {
     const [inputEmployeeId, setInputEmployeeId] = useState('')
 
     const handleLogin = () => {
@@ -12,14 +12,25 @@ const LoginPage = ({ setEmployeeId }) => {
                 .then(() => {
                     localStorage.setItem('employeeId', inputEmployeeId)
                     setEmployeeId(inputEmployeeId)
-                    alert(`Connected with employee ID : ${inputEmployeeId}`)
+                    setCurrentPage('main')
+                    alert(`Connected with employee ID: ${inputEmployeeId}`)
                 })
                 .catch(() => {
-                    alert('Invalid employee ID. Please try again.')
+                    alert('Employee ID not found.')
                 })
         } else {
             alert('Please enter a valid employee ID.')
         }
+    }
+
+    const handleInit = () => {
+        axios.post('http://localhost:8080/init')
+            .then(() => {
+                alert('Successfully initialized.')
+            })
+            .catch(() => {
+                alert('Initialization failed.')
+            })
     }
 
     return (
@@ -33,7 +44,7 @@ const LoginPage = ({ setEmployeeId }) => {
                 </a>
             </div>
             <h1 className="text-5xl">SIRH</h1>
-            <br/>
+            <div className="mb-4"></div>
             <h3 className="text-2xl mb-6">Login</h3>
             <input
                 type="text"
@@ -44,9 +55,15 @@ const LoginPage = ({ setEmployeeId }) => {
             />
             <button
                 onClick={handleLogin}
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4"
             >
                 Login
+            </button>
+            <button
+                onClick={handleInit}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+                Init
             </button>
         </div>
     )

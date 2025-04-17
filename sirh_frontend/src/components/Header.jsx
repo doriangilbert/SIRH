@@ -2,32 +2,46 @@ import React from 'react'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
 
-const Header = ({ fetchData, handleInit }) => {
+const Header = ({ employeeId, setEmployeeId, setCurrentPage }) => {
+    const handleLogout = () => {
+        localStorage.removeItem('employeeId')
+        setEmployeeId('')
+        setCurrentPage('login')
+        alert('Logged out successfully.')
+    }
+
     return (
         <header className="flex items-center justify-between p-5 bg-gray-200 z-10">
-            <div className="flex items-center">
+            <div className="flex items-center" onClick={() => setCurrentPage('main')} style={{ cursor: 'pointer' }}>
                 <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
+                    <img src={viteLogo} className="logo" alt="Logo Vite" />
                 </a>
                 <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
+                    <img src={reactLogo} className="logo react" alt="Logo React" />
                 </a>
+                <h1 className="text-3xl mr-4">SIRH</h1>
             </div>
-            <h1 className="text-3xl">SIRH</h1>
-            <div>
-                {['employees', 'evaluations', 'feedbacks', 'leaverequests', 'objectives', 'positions', 'skills', 'teams', 'trainings', 'trainingrequests', 'notifications'].map((item) => (
-                    <button
-                        key={item}
-                        onClick={() => fetchData(item)}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
-                    >
-                        {item.charAt(0).toUpperCase() + item.slice(1)}
-                    </button>
-                ))}
+            <div className="flex items-center">
+                <button
+                    onClick={() => setCurrentPage('main')}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"
+                >
+                    Home
+                </button>
             </div>
-            <button onClick={handleInit} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-2">
-                Init
-            </button>
+            <div className="flex items-center">
+                {employeeId && (
+                    <div className="flex items-center">
+                        <span className="mr-4">Employee ID: {employeeId}</span>
+                        <button
+                            onClick={handleLogout}
+                            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Logout
+                        </button>
+                    </div>
+                )}
+            </div>
         </header>
     )
 }
