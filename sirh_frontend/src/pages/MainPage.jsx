@@ -25,6 +25,24 @@ const MainPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
                 >
                     Review leave requests
                 </button>
+                <button
+                    onClick={() => setCurrentPage('makeTrainingRequest')}
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mt-4"
+                >
+                    Make training request
+                </button>
+                <button
+                    onClick={() => setCurrentPage('reviewTrainingRequests')}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                >
+                    Review training requests
+                </button>
+                <button
+                    onClick={() => setCurrentPage('downloadEvaluationReport')}
+                    className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mt-4"
+                >
+                    Download evaluation report
+                </button>
             </div>
         </div>
     )

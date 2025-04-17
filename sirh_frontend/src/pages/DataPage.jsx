@@ -24,7 +24,6 @@ const DataPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
         <div className="h-screen flex flex-col">
             <Header employeeId={employeeId} setEmployeeId={setEmployeeId} setCurrentPage={setCurrentPage} />
             <div className="flex flex-col items-center flex-grow">
-                <h2 className="text-xl mb-4">Logged in with employee ID: {employeeId}</h2>
                 <div className="mb-4">
                     <label htmlFor="entity-select" className="mr-2">Select an entity:</label>
                     <select

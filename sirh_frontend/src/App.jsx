@@ -5,6 +5,9 @@ import MainPage from './pages/MainPage.jsx'
 import DataPage from './pages/DataPage.jsx'
 import MakeLeaveRequestPage from './pages/MakeLeaveRequestPage.jsx'
 import ReviewLeaveRequestsPage from "./pages/ReviewLeaveRequestsPage.jsx";
+import MakeTrainingRequestPage from "./pages/MakeTrainingRequestPage.jsx";
+import ReviewTrainingRequestsPage from "./pages/ReviewTrainingRequestsPage.jsx";
+import DownloadEvaluationReportPage from "./pages/DownloadEvaluationReportPage.jsx";
 
 function App() {
     const [employeeId, setEmployeeId] = useState(localStorage.getItem('employeeId') || '')
@@ -43,6 +46,24 @@ function App() {
             )}
             {currentPage === 'reviewLeaveRequests' && employeeId && (
                 <ReviewLeaveRequestsPage
+                    employeeId={employeeId}
+                    setCurrentPage={setCurrentPage}
+                />
+            )}
+            {currentPage === 'makeTrainingRequest' && employeeId && (
+                <MakeTrainingRequestPage
+                    employeeId={employeeId}
+                    setCurrentPage={setCurrentPage}
+                />
+            )}
+            {currentPage === 'reviewTrainingRequests' && employeeId && (
+                <ReviewTrainingRequestsPage
+                    employeeId={employeeId}
+                    setCurrentPage={setCurrentPage}
+                />
+            )}
+            {currentPage === 'downloadEvaluationReport' && employeeId && (
+                <DownloadEvaluationReportPage
                     employeeId={employeeId}
                     setCurrentPage={setCurrentPage}
                 />

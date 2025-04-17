@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Header from '../components/Header.jsx'
 import DataTable from '../components/DataTable.jsx'
-import Header from "../components/Header.jsx";
 
-const ReviewLeaveRequestsPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
-    const [leaveRequests, setLeaveRequests] = useState([])
+const ReviewTrainingRequestsPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
+    const [trainingRequests, setTrainingRequests] = useState([])
     const [error, setError] = useState(null)
     const [requestId, setRequestId] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:8080/leaverequests')
+        axios.get('http://localhost:8080/trainingrequests')
             .then((response) => {
                 const filteredRequests = response.data.filter(
                     (request) => request.reviewer === parseInt(employeeId)
                 )
-                setLeaveRequests(filteredRequests)
+                setTrainingRequests(filteredRequests)
                 setError(null)
             })
             .catch((err) => {
-                setError(err.response?.data || 'An error occurred while fetching leave requests.')
+                setError(err.response?.data || 'An error occurred while fetching training requests.')
             })
     }, [employeeId])
 
@@ -28,11 +28,11 @@ const ReviewLeaveRequestsPage = ({ employeeId, setEmployeeId, setCurrentPage }) 
             return
         }
 
-        axios.put(`http://localhost:8080/leaverequests/${requestId}/${decision}`, {
+        axios.put(`http://localhost:8080/trainingrequests/${requestId}/${decision}`, {
             reviewerId: employeeId
         })
             .then(() => {
-                setLeaveRequests((prevRequests) =>
+                setTrainingRequests((prevRequests) =>
                     prevRequests.filter((request) => request.id !== parseInt(requestId))
                 )
                 setRequestId('')
@@ -47,7 +47,7 @@ const ReviewLeaveRequestsPage = ({ employeeId, setEmployeeId, setCurrentPage }) 
         <div className="h-screen flex flex-col">
             <Header employeeId={employeeId} setEmployeeId={setEmployeeId} setCurrentPage={setCurrentPage} />
             <div className="flex flex-col items-center justify-center">
-                <h1 className="text-3xl mb-6">Review leave requests</h1>
+                <h1 className="text-3xl mb-6">Review training requests</h1>
                 {error && <div className="text-red-500 mb-4">{error}</div>}
                 <div className="mb-4 flex items-center">
                     <input
@@ -70,10 +70,10 @@ const ReviewLeaveRequestsPage = ({ employeeId, setEmployeeId, setCurrentPage }) 
                         Refuse
                     </button>
                 </div>
-                {leaveRequests.length === 0 ? (
-                    <div>No leave request to review.</div>
+                {trainingRequests.length === 0 ? (
+                    <div>No training request to review.</div>
                 ) : (
-                    <DataTable data={leaveRequests} />
+                    <DataTable data={trainingRequests} />
                 )}
                 <button
                     onClick={() => setCurrentPage('main')}
@@ -86,4 +86,4 @@ const ReviewLeaveRequestsPage = ({ employeeId, setEmployeeId, setCurrentPage }) 
     )
 }
 
-export default ReviewLeaveRequestsPage
+export default ReviewTrainingRequestsPage
