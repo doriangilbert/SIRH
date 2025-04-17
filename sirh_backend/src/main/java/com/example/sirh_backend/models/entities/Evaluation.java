@@ -49,6 +49,10 @@ public class Evaluation {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Year getYear() {
         return year;
     }

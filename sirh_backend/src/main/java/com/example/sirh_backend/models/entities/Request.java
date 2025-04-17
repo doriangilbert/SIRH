@@ -37,6 +37,10 @@ public abstract class Request implements Subject {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public RequestStatus getStatus() {
         return status;
     }
