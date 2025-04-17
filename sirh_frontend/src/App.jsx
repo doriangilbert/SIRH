@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import LoginPage from './LoginPage'
-import MainPage from './MainPage'
-import DataPage from './DataPage'
+import LoginPage from './pages/LoginPage.jsx'
+import MainPage from './pages/MainPage.jsx'
+import DataPage from './pages/DataPage.jsx'
+import MakeLeaveRequestPage from './pages/MakeLeaveRequestPage.jsx'
+import ReviewLeaveRequestsPage from "./pages/ReviewLeaveRequestsPage.jsx";
 
 function App() {
     const [employeeId, setEmployeeId] = useState(localStorage.getItem('employeeId') || '')
@@ -30,6 +32,18 @@ function App() {
                 <DataPage
                     employeeId={employeeId}
                     setEmployeeId={setEmployeeId}
+                    setCurrentPage={setCurrentPage}
+                />
+            )}
+            {currentPage === 'makeLeaveRequest' && employeeId && (
+                <MakeLeaveRequestPage
+                    employeeId={employeeId}
+                    setCurrentPage={setCurrentPage}
+                />
+            )}
+            {currentPage === 'reviewLeaveRequests' && employeeId && (
+                <ReviewLeaveRequestsPage
+                    employeeId={employeeId}
                     setCurrentPage={setCurrentPage}
                 />
             )}

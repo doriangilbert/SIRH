@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import DataTable from './components/DataTable'
-import Header from './components/Header'
+import DataTable from '../components/DataTable.jsx'
+import Header from '../components/Header.jsx'
 
 const DataPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
     const [data, setData] = useState([])

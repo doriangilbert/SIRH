@@ -7,7 +7,11 @@ import com.example.sirh_backend.mappers.EmployeeMapper;
 import com.example.sirh_backend.mappers.LeaveRequestMapper;
 import com.example.sirh_backend.mappers.TrainingRequestMapper;
 import com.example.sirh_backend.models.entities.Employee;
+import com.example.sirh_backend.models.entities.LeaveRequest;
 import com.example.sirh_backend.services.EmployeeService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,12 +50,27 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/{id}/leaverequests")
-    public ResponseEntity<LeaveRequestDTO> makeLeaveRequest(@PathVariable long id, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) {
-        return new ResponseEntity<>(LeaveRequestMapper.toDTO(employeeService.makeLeaveRequest(id, LocalDate.parse(startDate), LocalDate.parse(endDate))), HttpStatus.CREATED);
+    public ResponseEntity<LeaveRequestDTO> makeLeaveRequest(@PathVariable long id, @RequestBody String requestBody) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode jsonNode = objectMapper.readTree(requestBody);
+            LocalDate startDate = LocalDate.parse(jsonNode.get("startDate").asText());
+            LocalDate endDate = LocalDate.parse(jsonNode.get("endDate").asText());
+            return new ResponseEntity<>(LeaveRequestMapper.toDTO(employeeService.makeLeaveRequest(id, startDate, endDate)), HttpStatus.CREATED);
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/employees/{id}/trainingrequests")
-    public ResponseEntity<TrainingRequestDTO> makeTrainingRequest(@PathVariable long id, @RequestParam("trainingId") long trainingId) {
-        return new ResponseEntity<>(TrainingRequestMapper.toDTO(employeeService.makeTrainingRequest(trainingId, id)), HttpStatus.CREATED);
+    public ResponseEntity<TrainingRequestDTO> makeTrainingRequest(@PathVariable long id, @RequestBody String requestBody) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode jsonNode = objectMapper.readTree(requestBody);
+            long trainingId = jsonNode.get("trainingId").asLong();
+            return new ResponseEntity<>(TrainingRequestMapper.toDTO(employeeService.makeTrainingRequest(trainingId, id)), HttpStatus.CREATED);
+        } catch (JsonProcessingException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

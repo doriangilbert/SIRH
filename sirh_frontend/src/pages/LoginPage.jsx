@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import reactLogo from './assets/react.svg'
+import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
 
 const LoginPage = ({ setEmployeeId, setCurrentPage }) => {

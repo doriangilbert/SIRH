@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from './components/Header'
+import Header from '../components/Header.jsx'
 
 const MainPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
     return (
@@ -12,6 +12,18 @@ const MainPage = ({ employeeId, setEmployeeId, setCurrentPage }) => {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
                 >
                     See data
+                </button>
+                <button
+                    onClick={() => setCurrentPage('makeLeaveRequest')}
+                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Make leave request
+                </button>
+                <button
+                    onClick={() => setCurrentPage('reviewLeaveRequests')}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                >
+                    Review leave requests
                 </button>
             </div>
         </div>
